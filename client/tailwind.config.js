@@ -17,7 +17,7 @@ module.exports = {
     },
     colors: {
       oscuro:  "rgb(42, 42, 42)",
-      blanco: 'rgb(226, 226, 226)',
+      blanco: 'rgb(246, 246, 246)',
       gris: 'rgba(87, 84, 84, 0.527)',
       amarillo: "rgb(211, 191, 13)",
       trans: "rgb(0,0,0, 0)",

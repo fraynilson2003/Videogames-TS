@@ -16,27 +16,20 @@ export default function Filter() {
       md:flex-col md:w-[150px]   md:h-[700px]  rounded '>
 
       <div className='flex flex-row overflow-x-scroll filter justify-start items-center' >
+        <input placeholder='search name' type="text" className='bg-gris text-blanco rounded px-2 mx-2 h-[30px] hover:text-oscuro hover:bg-blanco' />
 
         {tukis?.length && tukis.map((filt, ind)=>
-        <div className='flex flex-col mx-1'>
-          <p className='flex justify-start pl-1 py-0 my-0'>
-            {"as"}
-          </p>
-
           <select 
             className="select-bordered 
-            w-auto whitespace-nowrap px-2 text-sm bg-gris h-[30px] rounded"
+            w-auto whitespace-nowrap px-2 mx-2 text-sm bg-gris h-[30px] rounded"
           >
-
+            <option disabled selected>Who shot first?</option>
             {filt.option.map((e, i)=>
               <option key={i}>{e}</option>
             )}
           </select>
-
-        </div>
-
-
         )}
+
       </div>
 
     </div>
