@@ -29,7 +29,7 @@ export default function Filter() {
           )}
         </select>
 
-        {/* OTros */}
+        {/* OTros  */}
         {genders?.length && tukis.map((filt, ind)=>
           <select 
             className="select-bordered 
