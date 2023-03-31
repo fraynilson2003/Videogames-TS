@@ -39,7 +39,7 @@ export default function Filter() {
             <option disabled selected>Who shot first?</option>
 
             {filt.option.map((e, i)=>
-              <option value={e.id} key={i}>{e.name}</option>
+              <option value={e} key={i}>{e}</option>
             )}
           </select>
         )}
