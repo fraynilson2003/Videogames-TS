@@ -4,6 +4,7 @@ import { CONSTANTS } from "./constant";
 export const getAllVideogames = ()=>async(dispatch)=>{
   try {
     let result = await axios.get(``)
+    return result
   } catch (error) {
     
   }
