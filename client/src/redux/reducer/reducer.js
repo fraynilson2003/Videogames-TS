@@ -3,7 +3,8 @@ import { CONSTANTS } from "../actions/constant";
 
 const initialState = {
   user: "",
-  allGenders: []
+  allGenders: [],
+  allVideogames: []
 }
   
   export const rootReducer = (state = initialState, action)=>{
@@ -13,6 +14,12 @@ const initialState = {
         return{
           ...state,
           allGenders: action.payload
+        }
+      
+      case CONSTANTS.GET_ALL_VIDEOGAMES:
+        return {
+          ...state,
+          allVideogames: action.payload
         }
 
       case CONSTANTS.LOGIN:
