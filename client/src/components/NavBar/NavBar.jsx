@@ -24,7 +24,7 @@ export default function NavBar() {
 
   
   return (
-    <div className="navbar bg-oscuro text-blanco h-[50px] py-2 pad-x items-center justify-center ">
+    <div className="flex flex-row items-center justify-between bg-oscuro text-blanco h-[60px] py-2 marg-x rounded ">
         
      
       <div className="flex flex-row p-0 m-0 ">
@@ -37,9 +37,9 @@ export default function NavBar() {
           style={{cursor: 'pointer', scale: 1.2}}/>
       </div>
 
-      <div className="flex-1 justify-end">
+      <div className="flex flex-row items-center flex-1 w-auto justify-end pr-2">
         {/*Input*/}
-        <div className="form-control flex-1">
+        <div className="flex form-control flex-1">
           <input type="text" placeholder="Search" className="input bg-gris font-semibold text-blanco hover:bg-blanco px-2 h-10 hover:text-oscuro" />
         </div>
 
@@ -51,7 +51,8 @@ export default function NavBar() {
               {countFav && favoriteNum(countFav)}
             </div>
           </label>
-          <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
+
+          <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow ">
             <div className="card-body">
               <span className="font-bold text-oscuro text-lg">{`8 Items`}</span>
               <span className="text-info">Subtotal: $999</span>
@@ -63,7 +64,7 @@ export default function NavBar() {
         </div>
         
         {/* Perfil */}
-        <div className="dropdown dropdown-end pr-2">
+        <div className="dropdown dropdown-end ">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img src={missingAvatar} alt="avatar" />
@@ -80,6 +81,7 @@ export default function NavBar() {
             <li className="text-oscuro"><a>Logout</a></li>
           </ul>
         </div>
+
       </div>
 
     </div>

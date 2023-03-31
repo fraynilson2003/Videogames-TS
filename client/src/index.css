@@ -25,7 +25,7 @@ code {
   }
 
   .mar-vid{
-    @apply my-4 mx-4
+    @apply my-3
   }
 }
 
