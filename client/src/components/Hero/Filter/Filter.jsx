@@ -23,7 +23,7 @@ export default function Filter() {
           className="select-bordered 
           w-auto whitespace-nowrap px-2 mx-2 text-sm bg-gris h-[30px] rounded"
         >
-          <option value={0} key={0} disabled selected>{"Genders"}</option>
+          <option disabled selected>{"Genders"}</option>
 
           {genders.map((e, i)=>
             <option value={e.id} key={i+1}>{e.name}</option>
@@ -37,7 +37,7 @@ export default function Filter() {
             w-auto whitespace-nowrap px-2 mx-2 text-sm bg-gris h-[30px] rounded"
           >
             <option disabled selected>Who shot first?</option>
-            
+
             {filt.option.map((e, i)=>
               <option value={e.id} key={i}>{e.name}</option>
             )}
