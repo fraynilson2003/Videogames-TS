@@ -13,10 +13,11 @@ export default function CardVideogames(props) {
 
 
   return (
-    <div className="card my-2 mx-2 flex-auto w-auto max-h-[300px] max-w-[250px]  text-blanco bg-gris  bg-base-100 shadow-xl
-    md:max-w-[250px] md:my-3 md:mx-3 sm:my-2 sm:mx-2 rounded-md">
+    <div className="card my-2 mx-2 flex-auto w-auto max-h-[420px] max-w-[300px] min-w-[300px]  text-blanco bg-gris  bg-base-100 shadow-xl
+    md:my-3 md:mx-3 sm:my-2 sm:mx-2 rounded-md md:max-w-[280px] md:min-w-[280px]">
 
-      <div className="h-[100px] min-h-[150px] min-w-[250px] bg-amarillo overflow-hidden rounded-t-md">
+      <div className="h-[180px] min-h-[150px] max-w-[300px] min-w-[300px]  bg-amarillo overflow-hidden rounded-t-md 
+      md:max-w-[280px] md:min-w-[280px]">
         <img className="object-cover h-full w-full" src={props.img} alt="Shoes" />
       </div>
 

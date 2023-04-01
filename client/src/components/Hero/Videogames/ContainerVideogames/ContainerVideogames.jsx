@@ -13,11 +13,11 @@ export default function ContainerVideogames() {
   }, [])
 
   return (
-    <div className='bg-oscuro h-auto min-h-[650px] rounded'>
+    <div className='flex flex-col bg-oscuro h-auto  min-h-[650px] rounded'>
 
       <h2 className='font-primary text-2xl text-start pl-6 pt-4'>Videogoames</h2>
 
-      <div className='flex justify-center mt-2  flex-row flex-wrap md:justify-evenly'>
+      <div className='flex  mt-2  flex-row flex-wrap justify-around'>
         {videogames.length && videogames.map((vid)=>
           <CardVideogames
             name={vid.name}

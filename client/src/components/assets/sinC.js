@@ -32,7 +32,7 @@ export let videogames = [
     {
         "id": 55,
         "active": true,
-        "name": "Amnesia: The Dark Descent",
+        "name": "Amnesia: The Dark Descent Amnesia: The Dark Descent",
         "background_image": "https://media.rawg.io/media/games/b54/b54598d1d5cc31899f4f0a7e3122a7b0.jpg",
         "released": "2010-09-08",
         "Genders": [

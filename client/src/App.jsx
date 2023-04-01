@@ -10,7 +10,7 @@ axios.defaults.baseURL = "http://localhost:3008/"
 function App() {
 
   return (
-    <div className='App bg-fondo lg:pt-2'>
+    <div className='App h-auto md:h-[1800px] bg-fondo   '>
       <NavBar/>
       <Hero/>
     </div>
