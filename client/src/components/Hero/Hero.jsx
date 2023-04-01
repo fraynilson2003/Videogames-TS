@@ -12,7 +12,7 @@ export default function Hero() {
     dispatch(getAllGenders())
   },[])
   return (
-    <div className="flex flex-col md:flex-row h-screen w-[100%] pad-x text-blanco">
+    <div className="flex flex-col md:flex-row h-screen container mx-auto text-blanco">
       <Filter/>
       <Videogames/>
 

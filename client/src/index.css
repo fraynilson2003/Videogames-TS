@@ -18,12 +18,11 @@ code {
 
 @layer utilities {
   .pad-x{
-    @apply px-4 lg:px-16
+    @apply lg:px-16
   }
-  .marg-x{
-    @apply mx-4 lg:mx-16
+  .container{
+    @apply w-auto max-w-[960px]
   }
-
   .mar-vid{
     @apply my-3
   }

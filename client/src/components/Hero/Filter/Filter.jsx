@@ -12,8 +12,8 @@ export default function Filter() {
 
 
   return (
-    <div className=' mt-3 p-2 object-cover bg-oscuro flex flex-row w-[100%] h-[60px]
-      md:flex-col md:w-[280px]   md:h-[700px] md:mr-2  rounded '>
+    <div className='flex flex-row mt-3 object-cover bg-oscuro w-auto h-[60px]  p-2 mx-3
+      md:flex-col md:w-[280px]   md:h-[700px] lg:mr-2  rounded lg:mx-auto '>
 
       <div className='flex flex-row overflow-x-scroll filter justify-start items-center' >
         <input placeholder='search name' type="text" className='  flex md:hidden bg-gris text-blanco rounded px-2 mx-2 h-[30px] hover:text-oscuro hover:bg-blanco' />

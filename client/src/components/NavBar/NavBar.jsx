@@ -24,7 +24,8 @@ export default function NavBar() {
 
   
   return (
-    <div className="flex flex-row items-center justify-between bg-oscuro text-blanco h-[60px] py-2 marg-x rounded ">
+    <div className="flex flex-row items-center justify-between mx-auto container bg-oscuro text-blanco h-[60px] py-2  
+    lg:rounded ">
         
      
       <div className="flex flex-row p-0 m-0 ">

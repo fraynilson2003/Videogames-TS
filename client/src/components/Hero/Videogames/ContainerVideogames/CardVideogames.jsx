@@ -9,18 +9,18 @@ export default function CardVideogames(props) {
       ...g,
       name: name
     }
-  }).slice(1,4)
+  }).slice(0,2)
 
 
   return (
     <div className="card my-1 mx-1 flex-auto w-auto max-h-[300px] max-w-[300px]  text-blanco bg-gris  bg-base-100 shadow-xl
-    md:max-w-[250px] md:my-3 md:mx-3 sm:my-2 sm:mx-2 ">
-      <figure>
-        <img src={props.img} alt="Shoes" />
-      </figure>
+    md:max-w-[250px] md:my-3 md:mx-3 sm:my-2 sm:mx-2 rounded-md">
+      <div className="h-[100px] min-h-[150px] bg-amarillo overflow-hidden rounded-t-md">
+        <img className="object-cover h-full w-full" src={props.img} alt="Shoes" />
+      </div>
 
-      <div className="card-body py-2">
-        <h2 className="card-title">
+      <div className="card-body py-2 px-4 justify-between">
+        <h2 className="card-title text-start">
           {props.name}
         </h2>
 
@@ -28,7 +28,7 @@ export default function CardVideogames(props) {
 
         <div className="card-actions justify-end pb-2">
           {Genders.length? (Genders.map((g)=>
-            <div className="badge badge-outline">{g.name}</div>
+            <div className="badge badge-outline text-sm px-2">{g.name}</div>
           )):<></>}
         </div>
       </div>

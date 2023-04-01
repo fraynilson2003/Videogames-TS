@@ -7,7 +7,8 @@ export default function Videogames() {
 
 
   return (
-    <div className='felx flex-col flex-1 bg-oscuro h-[700px] mar-vid rounded md:ml-2'>
+    <div className='felx flex-col flex-1 bg-oscuro h-[700px] mar-vid mx-3 rounded
+     lg:ml-2 lg:mx-auto'>
 
       <ContainerVideogames/>
       <Paginado/>
