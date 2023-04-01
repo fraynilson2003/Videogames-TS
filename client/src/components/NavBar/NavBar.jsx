@@ -39,7 +39,7 @@ export default function NavBar() {
 
       <div className="flex flex-row items-center flex-1 w-auto justify-end pr-2">
         {/*Input*/}
-        <div className="flex form-control flex-1">
+        <div className="hidden form-control flex-1 md:flex">
           <input type="text" placeholder="Search" className="input bg-gris font-semibold text-blanco hover:bg-blanco px-2 h-10 hover:text-oscuro" />
         </div>
 
