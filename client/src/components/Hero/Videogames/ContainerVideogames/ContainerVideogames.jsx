@@ -6,7 +6,7 @@ import { getAllVideogames } from '../../../../redux/actions/actions'
 export default function ContainerVideogames() {
   let dispatch = useDispatch()
   let videogames = useSelector(state =>state.allVideogames)
-  videogames = videogames.slice(1,9)
+  videogames = videogames.slice(0,15)
 
   useEffect(()=>{
     dispatch(getAllVideogames())

@@ -21,7 +21,8 @@ module.exports = {
       gris: 'rgba(87, 84, 84, 0.527)',
       amarillo: "rgb(211, 191, 13)",
       trans: "rgb(0,0,0, 0)",
-      fondo: "rgb(58, 58, 58)"
+      fondo: "rgb(58, 58, 58)",
+      trans: "rgb(58, 58, 58, 0.0)"
     },
   },
 
