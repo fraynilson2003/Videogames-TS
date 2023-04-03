@@ -47,7 +47,7 @@ export default function NavBar() {
         {/*Carrito*/}
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
-            <div className="indicator ml-[2px]">
+            <div className="indicator ml-[2px] animate-pulse">
               <img src={favoritos}/>
               {countFav && favoriteNum(countFav)}
             </div>

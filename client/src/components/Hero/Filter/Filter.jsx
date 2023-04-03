@@ -25,7 +25,7 @@ export default function Filter() {
         {/*Genders  */}
         <select 
           className=" w-auto px-2 mx-2 text-sm bg-gris h-[30px] rounded 
-          md:my-2 md:w-[90%] md:mx-auto md:bg-trans md:hover:bg-gris"
+          md:my-2 md:w-[90%] md:h-auto md:py-2  md:mx-auto md:bg-trans md:hover:bg-gris"
         >
           <option disabled selected className=' bg-gris text-blanco '>{"Genders"}</option>
 
@@ -40,7 +40,7 @@ export default function Filter() {
         {tukis?.length && tukis.map((filt, ind)=>
           <select 
             className="w-auto px-2 mx-2 text-sm bg-gris h-[30px] rounded 
-            md:my-2 md:w-[90%] md:mx-auto md:bg-trans md:hover:bg-gris"
+            md:my-2 md:w-[90%] md:h-auto md:py-2 md:mx-auto md:bg-trans md:hover:bg-gris"
           >
             <option disabled selected className='bg-gris text-blanco '>Who shot first?</option>
 
