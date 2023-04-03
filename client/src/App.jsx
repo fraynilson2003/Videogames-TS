@@ -6,7 +6,7 @@ import axios from "axios"
 import { Suspense } from 'react';
 
 
-axios.defaults.baseURL = "http://localhost:3008/"
+axios.defaults.baseURL = "https://videogames-ts-production.up.railway.app/"
 
 function App() {
 
