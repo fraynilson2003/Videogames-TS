@@ -4,7 +4,7 @@ import { cleanVideogames, setConfigFilter } from "../../../redux/actions/filters
 import { getAllVideogames } from "../../../redux/actions/actions";
 import { Link } from "react-scroll"
 
-export default function Paginado() {
+export default function Paginado({isLoadingVideogame, setIsLoadingVideogame}) {
   let dispatch = useDispatch()
   let configFilter = useSelector((state)=>state.configFilterVideogames)
   let videogamesResult = useSelector((state)=>state.allVideogames)
@@ -17,7 +17,15 @@ export default function Paginado() {
       }
       dispatch(cleanVideogames())
       dispatch(setConfigFilter(newFilter))
-      dispatch(getAllVideogames(newFilter))
+
+      //responses
+      setIsLoadingVideogame(true)
+      let res = getAllVideogames(newFilter).then((res)=>{
+        dispatch(res)
+        setIsLoadingVideogame(false )
+      }).catch(err=>{
+        alert(err)
+      })
     }
 
     if(action === "next" && configFilter.page < videogamesResult.totalPages){
@@ -26,9 +34,16 @@ export default function Paginado() {
         page: configFilter.page + 1
       }
       dispatch(cleanVideogames())
-
       dispatch(setConfigFilter(newFilter))
-      dispatch(getAllVideogames(newFilter))
+
+      //responses
+      setIsLoadingVideogame(true)
+      let res = getAllVideogames(newFilter).then((res)=>{
+        dispatch(res)
+        setIsLoadingVideogame(false )
+      }).catch(err=>{
+        alert(err)
+      })
     }
   }
 

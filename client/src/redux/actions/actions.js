@@ -5,7 +5,7 @@ import { genders } from "../../components/assets/sinC";
 
 
 /**************** GET  ***********************/
-export const getAllVideogames = (config)=>async(dispatch)=>{
+export const getAllVideogames = async(config)=>{
   let result
   try {
     if(config){
@@ -26,12 +26,10 @@ export const getAllVideogames = (config)=>async(dispatch)=>{
 
 
 
-    return dispatch ({type:CONSTANTS.GET_ALL_VIDEOGAMES, payload: result.data})
-    //return dispatch ({type:CONSTANTS.GET_ALL_VIDEOGAMES, payload: videogames})
+    return {type:CONSTANTS.GET_ALL_VIDEOGAMES, payload: result.data}
 
   } catch (error) {
     let msg = (error.message? error.message : "Error en action getAllGenders")
-    alert(msg)
     throw new Error(msg)
   }
 }
