@@ -38,8 +38,30 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
     }).catch(err=>{
       alert(err)
     })
+  }
+
+  const handleNameFilter = (event)=>{
+    if (event.key === "Enter") {
+      let value = event.target.value
 
 
+      let newFilter = {
+        ...configFilter,
+        ["name"]: value
+      }
+  
+      dispatch(cleanVideogames())
+      dispatch(setConfigFilter(newFilter))
+  
+      //responses
+      setIsLoadingVideogame(true)
+      let res = getAllVideogames(newFilter).then((res)=>{
+        dispatch(res)
+        setIsLoadingVideogame(false )
+      }).catch(err=>{
+        alert(err)
+      })
+    }
   }
 
   return (
@@ -50,7 +72,7 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
       md:flex-col' >
 
         <div className='md:w-[90%] md:mx-auto'>
-          <input placeholder='search name' type="text" className='  flex md:hidden bg-gris text-blanco rounded px-2 mx-2 h-[30px] hover:text-oscuro hover:bg-blanco ' />
+          <input onKeyDown={handleNameFilter} placeholder='search name' type="text" className='  flex md:hidden bg-gris text-blanco rounded px-2 mx-2 h-[30px] hover:text-oscuro hover:bg-blanco ' />
         </div>
 
 

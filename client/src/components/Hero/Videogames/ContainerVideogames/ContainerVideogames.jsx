@@ -14,6 +14,12 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
   let videogames = useSelector(state =>state.allVideogames)
   let configFilter = useSelector(state => state.configFilterVideogames)
 
+  let totalVideogames = ""
+  if(videogames?.TotalCount && videogames.TotalCount > 0){
+    totalVideogames = `|    ${videogames.TotalCount} resultados`
+  }else{
+    totalVideogames = ""
+  }
 
   useEffect(()=>{
     setIsLoadingVideogame(true)
@@ -29,8 +35,8 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
   return (
     <div className='flex flex-col bg-oscuro h-auto  min-h-[650px] rounded'>
 
-      <h2  id="ContainerVideogames" className='font-primary text-2xl pb-2  text-start pl-6 pt-1
-      md:pt-4'>Videogoames</h2>
+      <p  id="ContainerVideogames" className='font-primary text-2xl pb-2 mr-2 text-start pl-6 pt-1
+      md:pt-4'>Videogoames <span className='font-semibold text-2xl '>{`${totalVideogames}`}</span> </p>
 
       <Paginado
       isLoadingVideogame={isLoadingVideogame}
