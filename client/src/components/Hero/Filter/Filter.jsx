@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { order } from "../../constants/order"
 import { cleanVideogames, setConfigFilter } from '../../../redux/actions/filters'
@@ -9,6 +9,9 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
   let configFilter = useSelector((state)=>state.configFilterVideogames)
 
   let dispatch = useDispatch()
+
+  //estado para input name
+  let [inputName, setInputName] = useState(configFilter?.name)
 
   let tukis = [
     {filter: "rating", option: ["Accion", "Aventura", "Comedia", "Hot", "Nice"]},
@@ -41,27 +44,30 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
   }
 
   const handleNameFilter = (event)=>{
-    if (event.key === "Enter") {
-      let value = event.target.value
+    event.preventDefault()
 
-
-      let newFilter = {
-        ...configFilter,
-        ["name"]: value
-      }
-  
-      dispatch(cleanVideogames())
-      dispatch(setConfigFilter(newFilter))
-  
-      //responses
-      setIsLoadingVideogame(true)
-      let res = getAllVideogames(newFilter).then((res)=>{
-        dispatch(res)
-        setIsLoadingVideogame(false )
-      }).catch(err=>{
-        alert(err)
-      })
+    let newFilter = {
+      ...configFilter,
+      ["name"]: inputName
     }
+
+    dispatch(setConfigFilter(newFilter))
+    dispatch(cleanVideogames())
+
+    //responses
+    setIsLoadingVideogame(true)
+    let res = getAllVideogames(newFilter).then((res)=>{
+      dispatch(res)
+      setIsLoadingVideogame(false )
+    }).catch(err=>{
+      alert(err)
+    })
+ 
+  }
+
+  const handleChangeName = (event)=>{
+    let value = event.target.value
+    setInputName(value)
   }
 
   return (
@@ -71,8 +77,13 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
       <div className='flex flex-row overflow-x-scroll filter justify-start items-center 
       md:flex-col' >
 
-        <form className='md:w-[90%] md:mx-auto'>
-          <input onKeyDown={handleNameFilter} placeholder='search name' type="text" className='  flex md:hidden bg-gris text-blanco rounded px-2 mx-2 h-[30px] hover:text-oscuro hover:bg-blanco ' />
+        <form onSubmit={handleNameFilter} className='md:w-[90%] md:mx-auto'>
+            <input 
+              className='flex md:hidden bg-gris text-blanco rounded px-2 mx-2 h-[30px] hover:text-oscuro hover:bg-blanco ' 
+              placeholder='search name' 
+              type="text"
+              onChange={handleChangeName}
+              value={inputName}/>
         </form>
 
 
