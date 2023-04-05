@@ -71,9 +71,9 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
       <div className='flex flex-row overflow-x-scroll filter justify-start items-center 
       md:flex-col' >
 
-        <div className='md:w-[90%] md:mx-auto'>
+        <form className='md:w-[90%] md:mx-auto'>
           <input onKeyDown={handleNameFilter} placeholder='search name' type="text" className='  flex md:hidden bg-gris text-blanco rounded px-2 mx-2 h-[30px] hover:text-oscuro hover:bg-blanco ' />
-        </div>
+        </form>
 
 
         {/*Genders  */}
