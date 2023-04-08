@@ -5,25 +5,25 @@ import { useDispatch } from 'react-redux'
 import { getAllGenders } from '../../redux/actions/actions'
 import Videogames from './Videogames/Videogames'
 
-export default function Hero() {
-  let [isLoadingVideogame, setIsLoadingVideogame] = useState(true)
-
-
+export default function Hero({isLoadingVideogame, setIsLoadingVideogame}) {
   let dispatch = useDispatch()
 
   useEffect(()=>{
     dispatch(getAllGenders())
   },[])
   return (
-    <div className="flex flex-col md:flex-row h-screen container mx-auto text-blanco">
-      <Filter
-      isLoadingVideogame={isLoadingVideogame}
-      setIsLoadingVideogame={setIsLoadingVideogame}/>
+    <div className='bg-oscuro '>
+      <div className="flex flex-col md:flex-row container bg-oscuro  text-blanco">
+          <Filter
+          isLoadingVideogame={isLoadingVideogame}
+          setIsLoadingVideogame={setIsLoadingVideogame}/>
 
-      <Videogames
-      isLoadingVideogame={isLoadingVideogame}
-      setIsLoadingVideogame={setIsLoadingVideogame}/>
-
+          <Videogames
+          isLoadingVideogame={isLoadingVideogame}
+          setIsLoadingVideogame={setIsLoadingVideogame}/>
+      </div>
     </div>
+
+
   )
 }

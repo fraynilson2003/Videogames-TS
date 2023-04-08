@@ -71,15 +71,15 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
   }
 
   return (
-    <div className='flex flex-row mt-3 object-cover bg-oscuro w-auto h-[60px]  p-2 mx-3
-      md:flex-col md:w-[240px]   md:h-[700px] xl:mr-2  rounded xl:mx-auto '>
+    <div className='flex flex-row mt-2 object-cover bg-fondo w-full h-[60px]  p-3  px-3 shadow-custom 
+      md:flex-col md:w-[240px] md:p-0 md:m-3 md:mr-2 md:shadow-none md:rounded-md md:mt-3 md:h-[400px]   xl:rounded xl:mx-auto'>
 
       <div className='flex flex-row overflow-x-scroll filter justify-start items-center 
       md:flex-col' >
 
         <form onSubmit={handleNameFilter} className='md:w-[90%] md:mx-auto'>
             <input 
-              className='flex md:hidden bg-gris text-blanco rounded px-2 mx-2 h-[30px] hover:text-oscuro hover:bg-blanco ' 
+              className='flex md:hidden w-[140px] h-[30px] bg-gris text-blanco rounded px-2 mx-2 hover:text-oscuro hover:bg-blanco ' 
               placeholder='search name' 
               type="text"
               onChange={handleChangeName}
@@ -94,7 +94,9 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
           onChange={handleFilter}
         >
           <option disabled selected className=' bg-gris text-blanco '>{"Genders"}</option>
-
+          <option className='md:text-oscuro bg-gris'name={"gender"}value={"0"}>
+            {`All`}
+          </option>
           {genders.map((e, i)=>
             <option 
               className='md:text-oscuro bg-gris'

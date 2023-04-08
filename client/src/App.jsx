@@ -1,9 +1,8 @@
 import './App.css';
-import NavBar from './components/NavBar/NavBar';
-import Hero from './components/Hero/Hero';
-import Footer from './components/Footer/Footer';
+import { Route, Routes } from "react-router-dom";
 import axios from "axios"
-import { Suspense } from 'react';
+import Home from './pages/Home';
+import VideogameDetail from './components/VideogameDetail/VideogameDetail';
 
 
 axios.defaults.baseURL = "https://videogames-ts-production.up.railway.app/"
@@ -11,10 +10,15 @@ axios.defaults.baseURL = "https://videogames-ts-production.up.railway.app/"
 function App() {
 
   return (
-    <div className='App h-auto md:h-[2000px] bg-fondo   '>
-      <NavBar/>
-      <Hero/>
+    <div className='App w-full min-w-full md:h-[2000px] bg-oscuro   '>
+      <Routes>
+        <Route exact path="/" element={<Home/>}/>
+
+        <Route exact path="/:idVideogame" element={<VideogameDetail/>}/>
+      </Routes>
     </div>
+
+
   )
 }
 

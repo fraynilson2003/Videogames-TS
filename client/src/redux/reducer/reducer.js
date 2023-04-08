@@ -5,6 +5,7 @@ import { CONSTANTS } from "../actions/constant";
 const initialState = {
   user: "",
   allGenders: [],
+  videogameId: {},
   allVideogames: {
     status: "",
     page: 1,
@@ -41,6 +42,12 @@ const initialState = {
         return {
           ...state,
           configFilterVideogames: action.payload
+        }
+
+      case CONSTANTS.GET_ID_VIDEOGAME:
+        return {
+          ...state,
+          videogameId: action.payload
         }
 
       //DELETE CLEAN

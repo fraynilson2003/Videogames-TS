@@ -61,7 +61,7 @@ export default function Paginado({isLoadingVideogame, setIsLoadingVideogame}) {
             {"«"}
         </Link>
 
-        <button className="btn min-h-[40px] h-[40px] pt-1">{` pag ${configFilter?.page}`}</button>
+        <button className="btn min-h-[40px] h-[40px] pt-1">{` pag ${configFilter?.page? configFilter?.page : "..."}`}</button>
         <Link onClick={()=>changePagination("next")} 
         to="#" 
         className="btn min-h-[40px] h-[40px] text-lg"

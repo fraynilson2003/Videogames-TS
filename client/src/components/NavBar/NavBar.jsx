@@ -1,15 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import missingAvatar from "../assets/Missing_avatar.svg.png"
 import favoritos from "../assets/favoritos.svg"
 import { ReactComponent  as Logo } from "../assets/TS.svg"
+import { cleanVideogames, setConfigFilter } from "../../redux/actions/filters";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllVideogames } from "../../redux/actions/actions";
 
-export default function NavBar() {
+export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
   const [isHovered, setIsHovered] = useState(false);
   const [countFav, setCountFav] = useState(7)
+  let configFilter = useSelector((state)=>state.configFilterVideogames)
+  let dispatch = useDispatch()
+
+  //estado para input name
+  let [inputName, setInputName] = useState(configFilter?.name)
 
   const handleHover = () => {
     setIsHovered(true);
   };
+
+
+  const handleNameFilter = (event)=>{
+    event.preventDefault()
+
+    let newFilter = {
+      ...configFilter,
+      ["name"]: inputName
+    }
+
+    dispatch(setConfigFilter(newFilter))
+    dispatch(cleanVideogames())
+
+    //responses
+    setIsLoadingVideogame(true)
+    let res = getAllVideogames(newFilter).then((res)=>{
+      dispatch(res)
+      setIsLoadingVideogame(false )
+    }).catch(err=>{
+      alert(err)
+    })
+ 
+  }
+
+
+  const handleChangeName = (event)=>{
+    let value = event.target.value
+    setInputName(value)
+  }
 
   let favoriteNum = (countFav)=>{
     if(countFav > 0 && countFav <= 9   ){
@@ -24,8 +61,8 @@ export default function NavBar() {
 
   
   return (
-    <div className="flex flex-row items-center justify-between mx-auto container bg-oscuro text-blanco h-[60px] py-2 pt-3  
-    lg:rounded ">
+    <div className="flex flex-row container items-center justify-between bg-oscuro text-blanco h-[60px] py-2 pt-3   
+    lg:rounded">
         
      
       <div className="flex flex-row p-0 m-0 ">
@@ -40,9 +77,14 @@ export default function NavBar() {
 
       <div className="flex flex-row items-center flex-1 w-auto justify-end pr-2">
         {/*Input*/}
-        <div className="hidden form-control flex-1 md:flex">
-          <input type="text" placeholder="Search" className="input bg-gris font-semibold text-blanco hover:bg-blanco px-2 h-10 hover:text-oscuro" />
-        </div>
+        <form onSubmit={handleNameFilter} className="hidden form-control flex-1 md:flex">
+          <input 
+            onChange={handleChangeName}
+            value={inputName}
+            type="text" 
+            placeholder="Search" 
+            className="input bg-gris font-semibold text-blanco hover:bg-blanco px-2 h-10 hover:text-oscuro" />
+        </form>
 
         {/*Carrito*/}
         <div className="dropdown dropdown-end">

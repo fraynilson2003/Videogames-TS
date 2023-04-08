@@ -21,7 +21,7 @@ code {
     @apply lg:px-16
   }
   .container{
-    @apply w-auto max-w-[1200px]
+    @apply w-full mx-auto max-w-[1200px]
   }
   .mar-vid{
     @apply my-3

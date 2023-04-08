@@ -18,11 +18,15 @@ module.exports = {
     colors: {
       oscuro:  "rgb(42, 42, 42)",
       blanco: 'rgb(246, 246, 246)',
-      gris: 'rgba(87, 84, 84, 0.527)',
+      gris: 'rgba(87, 84, 84)',
       amarillo: "rgb(211, 191, 13)",
       trans: "rgb(0,0,0, 0)",
       fondo: "rgb(58, 58, 58)",
       trans: "rgb(58, 58, 58, 0.0)"
+    },
+    boxShadow: {
+      custom: '0px 0px 10px 3px rgb(30, 30, 30)',
+      none: '0px 0px 0px 0px'
     },
   },
 

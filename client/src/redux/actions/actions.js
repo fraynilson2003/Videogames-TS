@@ -14,7 +14,7 @@ export const getAllVideogames = async(config)=>{
       if(config.page_size) querys.page_size = config.page_size
       if(config.orderABC) querys.orderABC = config.orderABC
       if(config.name && config.name !== "") querys.name = config.name
-      if(config.gender && config.name !== 0) querys.gender = config.gender
+      if(config.gender && config.gender !== 0 && config.gender !== "0") querys.gender = config.gender
 
       result = await axios.get(`/videogame`, {
         params: querys
@@ -31,6 +31,29 @@ export const getAllVideogames = async(config)=>{
   } catch (error) {
     let msg = (error.message? error.message : "Error en action getAllGenders")
     throw new Error(msg)
+  }
+}
+
+export const getAllVideogameById = async(id)=>{
+  let result
+  try {
+      result = await axios.get(`/videogame/${id}`)
+      
+    return {
+      type:CONSTANTS.GET_ID_VIDEOGAME, 
+      payload: result.data.result
+    }
+
+  } catch (error) {
+    let msg = (error.message? error.message : "Error en action getVideogameId")
+    throw new Error(msg)
+  }
+}
+
+export const cleanVideogameId = ()=>{
+  return {
+    type:CONSTANTS.GET_ID_VIDEOGAME, 
+    payload: {}
   }
 }
 

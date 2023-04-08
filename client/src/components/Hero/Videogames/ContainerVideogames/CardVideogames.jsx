@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import LoadingCard from "./LoadingCard";
+import { NavLink } from "react-router-dom";
 
 export default function CardVideogames(props) {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,13 +30,13 @@ export default function CardVideogames(props) {
 
       <div className={isLoading? classCardNonde : classCard}>
 
-        <div className="h-[180px] min-h-[150px] max-w-[300px] min-w-[300px] overflow-hidden rounded-t-md 
+        <NavLink to={`/${props.id}`} className="h-[180px] min-h-[150px] max-w-[300px] min-w-[300px] overflow-hidden rounded-t-md 
         md:max-w-[280px] md:min-w-[280px]">
           <img 
           className="object-cover h-full w-full"  
           src={props.img}
           onLoad={handleImageLoad}/>
-        </div>
+        </NavLink>
 
         <div className="card-body py-2 px-4 justify-between">
           <h2 className="card-title text-start">
