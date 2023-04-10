@@ -12,6 +12,10 @@ export const SchemaCreateVideogame = (genders)=>{
       Yup.number().oneOf(newGenders)
     )
     .required("Select at least one gender"),
+    background_image: Yup.mixed()
+    .test("fileSize", "Image is required", (value) => {
+      return value && value.size > 0;
+    })
   })
   return Schema
 }

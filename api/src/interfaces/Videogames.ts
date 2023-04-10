@@ -10,11 +10,29 @@ export interface VideogameInterface {
     description?: string
     released?: string
     background_image?: string
+    id_background_image?: string
     gender?: number
     genders?: number[]
     genres?: GenderInterface[] //solo para la extraccion de la api grande
 
 }
+
+export interface img {
+		image?: {
+			name?: string,
+			data?: {
+				type?: string,
+				data?: any
+			},
+			size?: number,
+			encoding?: string,
+			tempFilePath?: string,
+			truncated?: boolean,
+			mimetype?: string,
+			md5?: string
+		}
+}
+
 
 export enum VideogameEnum {
     active = "active",

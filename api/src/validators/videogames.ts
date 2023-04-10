@@ -34,7 +34,6 @@ export let validateCreaterVideogame = [
   check("name").optional().isString(),
   check("description").optional().isString(),
   check("released").optional().isDate(),
-  check("background_image").optional().isString(),
   check("genders").optional().isArray(),
   // Agregamos un objeto de validación adicional para manejar campos desconocidos
   check().custom((value, { req }) => {

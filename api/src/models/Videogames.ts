@@ -99,6 +99,10 @@ class Videogame extends Model {
           type: DataTypes.TEXT,
           defaultValue: "none"
       },
+      id_background_image: {
+        type: DataTypes.TEXT,
+        defaultValue: "none"
+      },
       released: {
           type: DataTypes.DATEONLY,
           defaultValue: Sequelize.fn('date', Sequelize.fn('now')),

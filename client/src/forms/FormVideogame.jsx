@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from "formik"
 import { BarraEleccion } from './BarraEleccion';
 import { SchemaCreateVideogame } from './videogame/SchemaCreateVideogame';
 import { useSelector } from 'react-redux';
+import { createVideogame } from '../redux/actions/actions';
 
 
 export default function FormVideogame() {
   let genders = useSelector(state => state.allGenders)
+
+  let [resultAlert, setResultAlert] = useState(false)
+  let [result, sertResult] = useState(false)
 
   let submitForm = (e)=>{
 
@@ -26,27 +30,60 @@ export default function FormVideogame() {
       name: "",
       description: "",
       released: "",
-      //background_image: "",
+      background_image: "",
       genders: [],
     },
     validationSchema: SchemaCreateVideogame(genders),
     onSubmit: (values, { resetForm }) => {
-      //dispatch(createService(values));
-      console.log("*******************");
-      console.log(values);
-      console.log("*******************");
+      createVideogameSync(values)
       resetForm();
     },
   });
 
+  let createVideogameSync = (videogame)=>{
+    createVideogame(videogame).then(res=>{
+      setResultAlert(true)
+      sertResult(true)
+    }).catch(err=>{
+      setResultAlert(true)
+      sertResult(false)
+    })
+  }
 
+  const changeInputImage = (e) => {
+    const value = e.target.files;
+    setValues({
+      ...values,
+      background_image: value[0],
+    });
+  };
+ 
   return (
-    <div className='flex justify-center w-full min-w-full h-auto  mt-4'>
+    <>
+    <div className='flex relative justify-center w-full min-w-full h-auto  mt-2'>
       <div className='mx-3 w-full h-auto max-w-[500px] py-3 px-5 rounded-lg bg-gris'>
  
           <form onSubmit={handleSubmit} className='flex flex-col h-auto mx-auto'>
-              <h2 className='text-xl text-blanco my-3 font-primary font-bold text-center 
+              <h2 onClick={createVideogameSync} className='text-xl text-blanco mt-3 font-primary font-bold text-center 
               md:text-3xl  '>Create Videogame</h2>
+              
+              <div id='alertResult'>
+                {resultAlert? result? (
+                    <div className="alert alert-success w-auto shadow-lg mt-2 select-none">
+                      <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>Your purchase has been confirmed!</span>
+                      </div>
+                    </div>            
+                ):(
+                    <div className="alert alert-error shadow-lg w-auto shadow-lg mt-2 select-none">
+                      <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>Error! Task failed successfully.</span>
+                      </div>
+                    </div>         
+                ): <></>}               
+              </div>  
 
               {/* Name */}
               <div className="mb-2 min-h-[95px]">
@@ -109,7 +146,7 @@ export default function FormVideogame() {
               </div>
 
               {/*background_image  */}
-              <div>
+              <div className='mb-2'>
                 <label
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   for="background_image"
@@ -121,7 +158,12 @@ export default function FormVideogame() {
                   id="background_image"
                   type="file"
                   name="background_image"
+                  onChange={changeInputImage}
+
                 />
+                {errors.background_image && touched.background_image ? (
+                <p className="text-amarillo text-md font-semibold font-primary">{errors.background_image}</p>
+                ) : null}                
               </div>
 
               <div className=' flex w-full justify-center mt-10'>
@@ -138,5 +180,8 @@ export default function FormVideogame() {
 
       </div>
     </div>
+
+    </>
+
   )
 }

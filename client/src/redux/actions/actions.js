@@ -26,7 +26,10 @@ export const getAllVideogames = async(config)=>{
 
 
 
-    return {type:CONSTANTS.GET_ALL_VIDEOGAMES, payload: result.data}
+    return {
+      type:CONSTANTS.GET_ALL_VIDEOGAMES, 
+      payload: result.data
+    }
 
   } catch (error) {
     let msg = (error.message? error.message : "Error en action getAllGenders")
@@ -71,3 +74,41 @@ export const getAllGenders = ()=>async(dispatch)=>{
   }
 }
 
+
+/*************** POST  ********************* */
+export const createVideogame = async(videogame)=>{
+  let result
+  try {
+    let img = videogame.background_image
+    delete videogame.background_image
+
+    result = await axios.post("/videogame", 
+    videogame)
+
+    //submit img
+    const customConfig = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    let idVid = Number(result.newVideogame?.id)
+
+    const formData = new FormData();
+    formData.append("image", img);
+    formData.append("id", idVid);
+
+    let resultImg = await axios.post(
+      '/videogame/img', 
+      formData,
+      customConfig
+    )
+
+    console.log(resultImg?.data?.status);
+    return result?.data?.status
+  } catch (error) {
+    console.log(error?.response?.data?.error);
+    throw error?.response?.data?.error
+  }
+
+}

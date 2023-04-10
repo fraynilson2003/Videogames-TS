@@ -7,8 +7,10 @@ const router = Router()
 router.get("/", [...V.validateFilterVideogame], videogameController.getVideoGames)
 router.get("/:idVideogame", [...V.validateGetVideogameId], videogameController.getVideoGameId)
 
+
 /**Post */
 router.post("/", [...V.validateCreaterVideogame], videogameController.postVideogame)
+router.post("/img", videogameController.putVideogameImg)
 
 /**Put */
 router.put("/", [...V.validateUpdateVideogame], videogameController.putVideogame)

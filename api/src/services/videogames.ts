@@ -158,27 +158,27 @@ export let setVideogames = async(videogame: VideogameInterface)=>{
   }
 }
 
-export let updateVideogame = async(user: VideogameInterface)=>{
+export let updateVideogame = async(videogameNew: VideogameInterface)=>{
   
   try {
     //sacamos los id de los Genders
     let idGenders: number[] = []
-    if(user.genders?.length){
-      idGenders = [...user.genders]
-      delete user.genders
+    if(videogameNew.genders?.length){
+      idGenders = [...videogameNew.genders]
+      delete videogameNew.genders
     }
 
-    let idVideogame: number = Number(user.id) 
-    delete user.id
+    let idVideogame: number = Number(videogameNew.id) 
+    delete videogameNew.id
 
     let videogame = await Videogame.findByPk(idVideogame)
-    let newVideoG = await videogame?.update({...user})
+    let putVideoGame = await videogame?.update({...videogameNew})
 
     if(idGenders.length > 0){
-      let videoAddGender = await newVideoG?.setGenders(idGenders)
+      let videoAddGender = await putVideoGame?.setGenders(idGenders)
     }
 
-    return newVideoG
+    return putVideoGame
   } catch (error) {
     let {message}: any = error
     console.log(message);
