@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { order } from "../../constants/order"
 import { cleanVideogames, setConfigFilter } from '../../../redux/actions/filters'
 import { getAllVideogames } from '../../../redux/actions/actions'
+import { NavLink } from 'react-router-dom'
 
 export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
   let genders = useSelector(state => state.allGenders)
@@ -74,6 +75,14 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
     <div className='flex flex-row mt-2 object-cover bg-fondo w-full h-[60px]  p-3  px-3 shadow-custom 
       md:flex-col md:w-[240px] md:p-0 md:m-3 md:mr-2 md:shadow-none md:rounded-md md:mt-3 md:h-[400px]   xl:rounded xl:mx-auto'>
 
+    <NavLink to={"/create"} className='hidden w-full mt-4 mb-4  md:block'>
+      <div className='bg-verde/60 border w-[170px] py-2 px-3 mx-auto rounded-lg cursor-pointer hover:bg-verde'>
+        <p className=' text-center text-lg font-bold'>New videogame</p>
+      </div>
+    </NavLink>
+
+
+
       <div className='flex flex-row overflow-x-scroll filter justify-start items-center 
       md:flex-col' >
 
@@ -97,15 +106,15 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
           <option className='md:text-oscuro bg-gris'name={"gender"}value={"0"}>
             {`All`}
           </option>
-          {genders.map((e, i)=>
+          {genders.length? (genders.map((e, i)=>
             <option 
-              className='md:text-oscuro bg-gris'
+              className='md:text-oscuro bg-gris '
               key={i+1}
               name={"gender"}
               value={e.id}>
                 {e.name}
-            </option>
-          )}
+            </option>)):<></>
+          }
         </select>
 
         {/* Name Order */}

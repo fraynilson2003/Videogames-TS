@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { cleanVideogameId, getAllVideogameById } from '../../redux/actions/actions';
+import { cleanVideogameId, getAllVideogameById } from '../redux/actions/actions';
 import { useParams } from 'react-router-dom';
-import { DetailLoading, DetailPLoading } from './DetailLoading';
+import { DetailLoading, DetailPLoading } from '../components/VideogameDetail/DetailLoading';
 import { NavLink } from "react-router-dom";
 
 export default function VideogameDetail() {

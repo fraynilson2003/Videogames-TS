@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(42, 42, 42);
 }
 
 code {
@@ -26,6 +27,7 @@ code {
   .mar-vid{
     @apply my-3
   }
+
 }
 
 

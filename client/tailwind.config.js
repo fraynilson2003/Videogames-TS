@@ -22,7 +22,9 @@ module.exports = {
       amarillo: "rgb(211, 191, 13)",
       trans: "rgb(0,0,0, 0)",
       fondo: "rgb(58, 58, 58)",
-      trans: "rgb(58, 58, 58, 0.0)"
+
+      verde: "rgb(7, 102, 19)",
+      azul: "rgb(30, 30, 117)",
     },
     boxShadow: {
       custom: '0px 0px 10px 3px rgb(30, 30, 30)',

@@ -30,7 +30,7 @@ export default function CardVideogames(props) {
 
       <div className={isLoading? classCardNonde : classCard}>
 
-        <NavLink to={`/${props.id}`} className="h-[180px] min-h-[150px] max-w-[300px] min-w-[300px] overflow-hidden rounded-t-md 
+        <NavLink to={`detail/${props.id}`} className="h-[180px] min-h-[150px] max-w-[300px] min-w-[300px] overflow-hidden rounded-t-md 
         md:max-w-[280px] md:min-w-[280px]">
           <img 
           className="object-cover h-full w-full"  

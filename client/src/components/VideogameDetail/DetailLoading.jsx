@@ -14,7 +14,7 @@ export function DetailLoading() {
 
 export function DetailPLoading(){
   return (
-    <div className='w-full animate-pulse h-auto mt-5 px-5 text-blanco bg-oscuro'>
+    <div className='w-full animate-pulse h-auto mt-5 px-5 text-blanco bg-oscuro md:mx-0 md:px-0'>
       <div className='w-40 mx-auto my-5 h-3 bg-blanco rounded-lg 
       md:h-4 md:w-55 md:mb-10  '></div>
 
@@ -22,7 +22,7 @@ export function DetailPLoading(){
       <div className='my-3 h-2 bg-blanco rounded-lg'></div>
       <div className='my-3 h-2 bg-blanco rounded-lg'></div>
 
-      <div className='my-3 mb-14  w-[40%] h-2 bg-blanco rounded-lg'></div>
+      <div className='my-3 mb-14  w-[40%] h-2 bg-blanco rounded-lg md:mb-20'></div>
 
       <div className='w-20 my-5 h-3 bg-blanco rounded-lg'></div>
 
@@ -32,10 +32,7 @@ export function DetailPLoading(){
         
         <div className='my-5 h-10 bg-blanco/90 rounded-lg 
         md:w-[170px] md:h-[120px] md:w-min-[170px] md:h-min-[120px]  md:w-max-[170px] md:h-max-[120px] md:mx-3 md:my-3 md:rounded-lg '></div>
-        
-        <div className='my-5 h-10 bg-blanco/90 rounded-lg 
-        md:w-[170px] md:h-[120px] md:w-min-[170px] md:h-min-[120px]  md:w-max-[170px] md:h-max-[120px] md:mx-3 md:my-3 md:rounded-lg '></div>
-        
+      
       </div>
 
 
