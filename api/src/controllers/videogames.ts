@@ -11,7 +11,7 @@ import {
 import { trimObject } from "../helpers/trimProperties";
 import { uploadImg } from '../utils/cloudinary';
 import Videogame from '../models/Videogames';
-import { unlink } from 'fs';
+import fs from 'fs-extra';
 
 
 export const getVideoGames = async(req: Request, res: Response)=>{
@@ -89,7 +89,7 @@ export const putVideogameImg = async(req: Request, res: Response)=>{
     }
 
     //delete img
-    let deleteImg = unlink(String(fileImage?.image?.tempFilePath), (err)=>{
+    let deleteImg = await fs.unlink(String(fileImage?.image?.tempFilePath), (err)=>{
       console.log(err);
     })
 
@@ -105,7 +105,7 @@ export const putVideogameImg = async(req: Request, res: Response)=>{
     })
   } catch (error) {
     //delete img
-    let deleteImg = unlink(String(fileImage?.image?.tempFilePath), (err)=>{
+    let deleteImg = await fs.unlink(String(fileImage?.image?.tempFilePath), (err)=>{
       console.log(err);
     })
 
