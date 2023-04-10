@@ -22,6 +22,7 @@ module.exports = {
       amarillo: "rgb(211, 191, 13)",
       trans: "rgb(0,0,0, 0)",
       fondo: "rgb(58, 58, 58)",
+      rojo: "rgb(170, 10, 30)",
 
       verde: "rgb(7, 102, 19)",
       azul: "rgb(30, 30, 117)",

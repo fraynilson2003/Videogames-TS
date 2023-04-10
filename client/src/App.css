@@ -32,15 +32,7 @@ body::-webkit-scrollbar-thumb{
   background-color: rgb(24, 23, 23);
 }
 
-.gender::-webkit-scrollbar{
-  background-color: rgba(32, 34, 34, 0.836);
 
-  height: 0px;
-  width: 6px;
-}
-.gender::-webkit-scrollbar-thumb{
-  background-color: rgb(24, 23, 23);
-}
 
 
 

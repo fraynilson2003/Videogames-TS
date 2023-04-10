@@ -1,9 +1,12 @@
 import React from 'react'
 import { useFormik } from "formik"
 import { BarraEleccion } from './BarraEleccion';
+import { SchemaCreateVideogame } from './videogame/SchemaCreateVideogame';
+import { useSelector } from 'react-redux';
 
 
 export default function FormVideogame() {
+  let genders = useSelector(state => state.allGenders)
 
   let submitForm = (e)=>{
 
@@ -23,11 +26,15 @@ export default function FormVideogame() {
       name: "",
       description: "",
       released: "",
-      background_image: "",
-      genders: "",
+      //background_image: "",
+      genders: [],
     },
+    validationSchema: SchemaCreateVideogame(genders),
     onSubmit: (values, { resetForm }) => {
       //dispatch(createService(values));
+      console.log("*******************");
+      console.log(values);
+      console.log("*******************");
       resetForm();
     },
   });
@@ -42,29 +49,62 @@ export default function FormVideogame() {
               md:text-3xl  '>Create Videogame</h2>
 
               {/* Name */}
-              <div className="mb-6">
+              <div className="mb-2 min-h-[95px]">
                 <label for="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                <input name="name" type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="gta" required/>
+                <input 
+                  name="name" 
+                  type="text" 
+                  id="name" 
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="gta"/>
+                {errors.name && touched.name ? (
+                <p className="text-amarillo text-md font-semibold font-primary">{errors.name}</p>
+                ) : null}
               </div>
+ 
 
               {/* Description */}
-              <div className="mb-6">
-                <label for="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                <textarea name="description" type="text" as="textarea" id="description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="..." required/>
+              <div className="mb-2 min-h-[115px]">
+                <label for="description"  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                <textarea 
+                  name="description" 
+                  type="text" as="textarea" 
+                  id="description" 
+                  value={values.description}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="..."/>
+                {errors.description && touched.description ? (
+                <p className="text-amarillo text-md font-semibold font-primary">{errors.description}</p>
+                ) : null}                  
               </div>
 
               {/* released */}
-              <div className="mb-6">
-                <label for="released" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">released</label>
-                <input name="released" type="date" id="released" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
+              <div className="mb-2 min-h-[95px]">
+                <label for="released"  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Released</label>
+                <input 
+                  name="released" 
+                  type="date" 
+                  id="released" 
+                  value={values.released}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                {errors.released && touched.released ? (
+                <p className="text-amarillo text-md font-semibold font-primary">{errors.released}</p>
+                ) : null}
               </div>
 
               {/* genders */}
-              <div className="mb-6">
-                
-                
+              <div className="mb-2 min-h-[95px]">
+
                 <BarraEleccion
-                buttonGroup={"genders"}/>
+                values={values}
+                setValues={setValues}
+                errors={errors}
+                touched={touched}/>
 
               </div>
 
@@ -85,9 +125,13 @@ export default function FormVideogame() {
               </div>
 
               <div className=' flex w-full justify-center mt-10'>
-                <button type="submit" className="text-white w-auto  py-1.5 bg-verde hover:bg-verde/60 border text-oscuro font-bold text-base hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg   px-5  text-center">
-                  Create
+                <button 
+                  type="submit" 
+                  className={`text-white w-auto  py-1.5 bg-verde  border text-oscuro font-bold text-base  rounded-lg   px-5  text-center ${isValid? 'bg-verde hover:bg-verde/80 ':'bg-verde/40'}`}
+                  >
+                    Create
                 </button>
+
               </div>
 
           </form>

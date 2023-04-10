@@ -69,7 +69,9 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
 
       </div>  
 
-      <Paginado/>
+      <Paginado
+      isLoadingVideogame={isLoadingVideogame}
+      setIsLoadingVideogame={setIsLoadingVideogame}/>
 
 
     </div>
