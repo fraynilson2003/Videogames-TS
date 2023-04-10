@@ -41,6 +41,7 @@ export enum VideogameEnum {
     description = "description",
     released = "released",
     background_image = "background_image",
+    id_background_image = "id_background_image",
     gender = "gender",
     genders = "genders",
 
@@ -54,6 +55,7 @@ export let arrVideogame: string[] = [
     "description",
     "released",
     "background_image",
+    "id_background_image",
     "gender",
     "genders"
 ]
