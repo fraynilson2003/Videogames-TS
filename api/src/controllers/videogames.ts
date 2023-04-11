@@ -11,7 +11,8 @@ import {
 import { trimObject } from "../helpers/trimProperties";
 import { uploadImg } from '../utils/cloudinary';
 import Videogame from '../models/Videogames';
-import fs from 'fs-extra';
+import fs from 'fs';
+import { PathLike } from "fs";
 
 
 export const getVideoGames = async(req: Request, res: Response)=>{
@@ -96,9 +97,9 @@ export const putVideogameImg = async(req: Request, res: Response)=>{
     let result = await updateVideogame(propertysVid)
 
     //delete img
-    let deleteImg = await fs.unlink(`../../${String(fileImage?.image?.tempFilePath)}`, (err)=>{
-      console.log(err);
-    })
+    let path: PathLike = `${String(fileImage?.image?.tempFilePath)}`
+    let deleteImg = fs.unlinkSync(path)
+
 
     return res.status(202).json({
       status: "sucess sssssssssssssss",
@@ -107,9 +108,8 @@ export const putVideogameImg = async(req: Request, res: Response)=>{
     })
   } catch (error) {
     //delete img
-    let deleteImg = await fs.unlink(`../../${String(fileImage?.image?.tempFilePath)}`, (err)=>{
-      console.log(err);
-    })
+    let path: PathLike = `${String(fileImage?.image?.tempFilePath)}`
+    let deleteImg = fs.unlinkSync(path)
 
     let {message}: any = error
     handleHttp(res, message)
