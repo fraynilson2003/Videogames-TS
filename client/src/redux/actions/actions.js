@@ -89,10 +89,10 @@ export const createVideogame = async(videogame)=>{
     const customConfig = {
       headers: {
         "Content-Type": "multipart/form-data",
-      },
+      }
     };
 
-    let idVid = Number(result.newVideogame?.id)
+    let idVid = Number(result.data.newVideogame?.id)
 
     const formData = new FormData();
     formData.append("image", img);
