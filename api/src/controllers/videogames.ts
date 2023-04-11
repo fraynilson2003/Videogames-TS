@@ -88,15 +88,17 @@ export const putVideogameImg = async(req: Request, res: Response)=>{
       throw new Error("could not upload image")
     }
 
-    //delete img
-    let deleteImg = await fs.unlink(String(fileImage?.image?.tempFilePath), (err)=>{
-      console.log(err);
-    })
+
 
     propertysVid.background_image = resultImg.secure_url;
     propertysVid.id_background_image = resultImg.public_id;
 
     let result = await updateVideogame(propertysVid)
+
+    //delete img
+    let deleteImg = await fs.unlink(`../../${String(fileImage?.image?.tempFilePath)}`, (err)=>{
+      console.log(err);
+    })
 
     return res.status(202).json({
       status: "sucess sssssssssssssss",
@@ -105,7 +107,7 @@ export const putVideogameImg = async(req: Request, res: Response)=>{
     })
   } catch (error) {
     //delete img
-    let deleteImg = await fs.unlink(String(fileImage?.image?.tempFilePath), (err)=>{
+    let deleteImg = await fs.unlink(`../../${String(fileImage?.image?.tempFilePath)}`, (err)=>{
       console.log(err);
     })
 
