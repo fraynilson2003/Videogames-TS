@@ -1,18 +1,24 @@
 import React, { useState } from "react";
-import missingAvatar from "../../assets/Missing_avatar.svg.png"
 import favoritos from "../../assets/favoritos.svg"
 import { ReactComponent  as Logo } from "../../assets/TS.svg"
 import { cleanVideogames, setConfigFilter } from "../../redux/actions/filters";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllVideogames } from "../../redux/actions/actions";
-import { NavLink } from "react-router-dom";
 import Logout from "../Login/Logout";
+import missingAvatar from "../../assets/Missing_avatar.svg.png"
+import { useAuth0 } from "@auth0/auth0-react";
+import Login from "../Login/Login";
 
 export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
   const [isHovered, setIsHovered] = useState(false);
   const [countFav, setCountFav] = useState(7)
   let configFilter = useSelector((state)=>state.configFilterVideogames)
   let dispatch = useDispatch()
+
+  //login?
+  let userAuth0 = useSelector((state)=>state.userAuth0)
+  const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0()
+
 
   //estado para input name
   let [inputName, setInputName] = useState(configFilter?.name)
@@ -112,23 +118,33 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
         <div className="dropdown dropdown-end ">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              {}
-              <img src={missingAvatar} alt="avatar" />
-
-
-            </div>
+              {userAuth0?.imagePerfil? (
+                <img src={`${userAuth0.imagePerfil}`} alt={userAuth0.name} />
+              ):(
+                <img src={missingAvatar} alt="no register" />
+              )}
+            </div>  
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-            <li className="text-oscuro">
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li className="text-oscuro"><a>Settings</a></li>
-            <li className="text-oscuro">
-              <Logout/>
-            </li>
+            {userAuth0?.imagePerfil? (
+              <>
+                <li className="text-oscuro">
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+                <li className="text-oscuro"><a>Settings</a></li>
+                <li className="text-oscuro">
+                  <Logout/>
+                </li>
+              </>
+            ):(
+              <>
+                <Login/>
+              </>
+            )}
+
           </ul>
         </div>
 

@@ -4,24 +4,24 @@ import axios from "axios"
 import Home from './pages/Home';
 import VideogameDetail from './pages/VideogameDetail';
 import CreateVideogame from './pages/CreateVideogame';
-import Login from './pages/Login';
 import { useLoginStorage } from './helpers/useLoginStorage';
 import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { putUserAuth0 } from './redux/actions/userAction';
+import { useDispatch } from 'react-redux';
 
 
 axios.defaults.baseURL = "https://videogames-ts-production.up.railway.app/"
 
 function App() {
-  const [ userInfo, isLogin ] = useLoginStorage();
+  let dispatch = useDispatch()
 
-  const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0()
+  const { user, isAuthenticated, isLoading } = useAuth0()
   
-  useEffect(()=>{
+  let login = ()=>{
+    console.log(isAuthenticated);
+    const localStorage = window.localStorage.getItem("userStorage");
     if(isAuthenticated){
-      const localStorage = window.localStorage.getItem("userStorage");
-
       if(!localStorage){
         let userLogin = {
           name: user.name,
@@ -30,25 +30,26 @@ function App() {
         }
 
         window.localStorage.setItem("userStorage", JSON.stringify(userLogin));
-        putUserAuth0(userLogin)
-      }else{
-        let userLogin = JSON.parse(localStorage)
-        putUserAuth0(userLogin)
+        console.log("Entraron a 1");
+        dispatch(putUserAuth0(userLogin))
       }
-
-      window.localStorage.removeItem("userStorage");
-      window.localStorage.setItem("userStorage", JSON.stringify({
-        name: user.name,
-        email: user.email,
-        picture: user.picture
-      }));
+    }else{
+      if(localStorage){
+        let userLogin = JSON.parse(localStorage)
+        console.log("Entraron a 2");
+  
+        dispatch(putUserAuth0(userLogin))
+      }
     }
-  }, [])
-
+  }
+  
+  useEffect(()=>{
+    login()
+  }, [isAuthenticated])
 
   useEffect(()=>{
-
-  }, [isLogin])
+    login()
+  }, [])
   return (
     <div className='App w-full min-w-full md:h-[2000px] '>
       <Routes>
@@ -58,9 +59,7 @@ function App() {
 
         <Route exact path="/create" element={<CreateVideogame/>}/>
 
-        <Route exact path="/login" element={<Login 
-          userInfo={userInfo}
-          isLogin={isLogin}/>}/>
+
 
       </Routes>
     </div>
