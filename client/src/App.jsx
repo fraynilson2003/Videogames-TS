@@ -32,8 +32,8 @@ function App() {
         dispatch(
           loginAuth0(userLogin)
           .then(res=>{
-            window.localStorage.setItem("userStorage", JSON.stringify(res));
-            dispatch(putUserAuth0(res))
+            window.localStorage.setItem("userStorage", JSON.stringify(res.payload));
+            dispatch(putUserAuth0(res.payload))
           }).catch(err=>{
             alert("No se pudo iniciar sesion")
           })
