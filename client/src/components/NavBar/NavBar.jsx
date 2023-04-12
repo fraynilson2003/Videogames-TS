@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import missingAvatar from "../assets/Missing_avatar.svg.png"
-import favoritos from "../assets/favoritos.svg"
-import { ReactComponent  as Logo } from "../assets/TS.svg"
+import missingAvatar from "../../assets/Missing_avatar.svg.png"
+import favoritos from "../../assets/favoritos.svg"
+import { ReactComponent  as Logo } from "../../assets/TS.svg"
 import { cleanVideogames, setConfigFilter } from "../../redux/actions/filters";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllVideogames } from "../../redux/actions/actions";
+import { NavLink } from "react-router-dom";
+import Logout from "../Login/Logout";
 
 export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
   const [isHovered, setIsHovered] = useState(false);
@@ -50,9 +52,9 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
 
   let favoriteNum = (countFav)=>{
     if(countFav > 0 && countFav <= 9   ){
-      return <span className=" badge badge-sm indicator-item left-[15px] p-[5px] top-[7px]">{`${countFav}`}</span>
+      return <span className=" badge badge-sm indicator-item left-[15px] p-[5px] top-[7px] animate-pulse">{`${countFav}`}</span>
     }else if(countFav > 9){
-      return <span className=" badge badge-sm indicator-item left-[12px] p-[4px] top-[7px]">{`9+`}</span>
+      return <span className=" badge badge-sm indicator-item left-[12px] p-[4px] top-[7px] animate-pulse">{`9+`}</span>
     }else{
       return <></>
     }
@@ -89,7 +91,7 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
         {/*Carrito*/}
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
-            <div className="indicator ml-[2px] animate-pulse">
+            <div className="indicator ml-[2px] ">
               <img src={favoritos}/>
               {countFav && favoriteNum(countFav)}
             </div>
@@ -110,7 +112,10 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
         <div className="dropdown dropdown-end ">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
+              {}
               <img src={missingAvatar} alt="avatar" />
+
+
             </div>
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
@@ -121,7 +126,9 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
               </a>
             </li>
             <li className="text-oscuro"><a>Settings</a></li>
-            <li className="text-oscuro"><a>Logout</a></li>
+            <li className="text-oscuro">
+              <Logout/>
+            </li>
           </ul>
         </div>
 

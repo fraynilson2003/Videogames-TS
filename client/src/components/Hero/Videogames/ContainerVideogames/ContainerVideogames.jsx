@@ -2,7 +2,7 @@ import React, { lazy, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CardVideogames from './CardVideogames'
 import Paginado from '../Paginado'
-import Spinner from '../../../extras/Spinner'
+import Spinner from '../../../../extras/Spinner'
 import { getAllVideogames } from '../../../../redux/actions/actions'
 
 let CardVideogame = lazy(()=>import('./CardVideogames'))

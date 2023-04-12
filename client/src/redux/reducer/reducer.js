@@ -3,7 +3,7 @@ import { CONSTANTS } from "../actions/constant";
 
 
 const initialState = {
-  user: "",
+  userAuth0: {},
   allGenders: [],
   videogameId: {},
   allVideogames: {
@@ -25,6 +25,13 @@ const initialState = {
   
   export const rootReducer = (state = initialState, action)=>{
     switch (action.type) {
+      //LOGIN
+      case CONSTANTS.SET_USER_AUTH0:
+        return{
+          ...state,
+          userAuth0: action.payload
+        }
+
       // GET
       case CONSTANTS.GET_ALL_GENERS:
         return{

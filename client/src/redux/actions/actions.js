@@ -1,6 +1,5 @@
 import axios from "axios"
 import { CONSTANTS } from "./constant";
-import { genders } from "../../components/assets/sinC";
 
 
 
@@ -62,10 +61,9 @@ export const cleanVideogameId = ()=>{
 
 export const getAllGenders = ()=>async(dispatch)=>{
   try {
-    //let result = await axios.get(`/gender`)
+    let result = await axios.get(`/gender`)
     
-    //return dispatch ({type:CONSTANTS.GET_ALL_GENERS, payload: result.data.genders})
-    return dispatch ({type:CONSTANTS.GET_ALL_GENERS, payload: genders})
+    return dispatch ({type:CONSTANTS.GET_ALL_GENERS, payload: result.data.genders})
 
   } catch (error) {
     let msg = (error.message? error.message : "Error en action getAllGenders")

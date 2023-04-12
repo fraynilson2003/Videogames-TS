@@ -9,6 +9,7 @@ export let validateCreateUser = [
     check("email").exists().isEmail(),
     check("sexo").optional().trim(),
     check("edad").optional().isInt(),
+    check("imagePerfil").optional(),
 
     check().custom((value, { req }) => {
         const unknownFields = Object.keys(req.body).filter(key => !arrUsers.includes(key));

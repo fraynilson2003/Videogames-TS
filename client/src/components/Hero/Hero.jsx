@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import portada from "../assets/png-clipart-shuriken-ninja-ninjutsu-ninja-star-game-cdr.png"
 import Filter from './Filter/Filter'
 import { useDispatch } from 'react-redux'
 import { getAllGenders } from '../../redux/actions/actions'

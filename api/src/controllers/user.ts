@@ -64,10 +64,7 @@ export const postUser = async (req: Request, res: Response) => {
 
     let user = await setUser_S(newUser)
 
-    return res.status(202).json({
-      status: "sucess",
-      newUser: user
-    })
+    return res.status(202).json(user)
   } catch (error) {
     let { message }: any = error
     handleHttp(res, message)

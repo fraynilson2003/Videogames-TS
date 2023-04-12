@@ -82,8 +82,24 @@ export let getUserId_S = async(id: number)=>{
 export let setUser_S = async(user: UserInterface)=>{
   
   try {
+    let existUser = await User.findOne({
+      where: {email: user.email}
+    })
+
+    if(existUser){
+      return {
+        status: "sucess",
+        message: "login",
+        user: existUser
+      }
+    }
+
     let newUser = await User.create({...user})
-    return newUser
+    return {
+      status: "sucess",
+      message: "created",
+      user: newUser
+    }
   } catch (error) {
     let {message}: any = error
     console.log(message);

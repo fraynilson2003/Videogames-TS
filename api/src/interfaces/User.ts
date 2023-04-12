@@ -33,7 +33,8 @@ export let arrUsers: string[] = [
     "email",
     "sexo",
     "edad",
-    "created_at"
+    "created_at",
+    "imagePerfil"
 ]
 
 export interface UserQuery extends UserInterface, QuerysFilter {
