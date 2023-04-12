@@ -16,7 +16,7 @@ axios.defaults.baseURL = "https://videogames-ts-production.up.railway.app/"
 function App() {
   let dispatch = useDispatch()
 
-  const { user, isAuthenticated, isLoading } = useAuth0()
+  const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0()
   
   let login = ()=>{
     console.log(isAuthenticated);
@@ -29,15 +29,15 @@ function App() {
         }
 
         console.log("Entraron a 1");
-        dispatch(
-          loginAuth0(userLogin)
-          .then(res=>{
-            window.localStorage.setItem("userStorage", JSON.stringify(res.payload));
-            dispatch(putUserAuth0(res.payload))
-          }).catch(err=>{
-            alert("No se pudo iniciar sesion")
-          })
-          )
+        
+        loginAuth0(userLogin)
+        .then(res=>{
+          window.localStorage.setItem("userStorage", JSON.stringify(res));
+          dispatch(putUserAuth0(res))
+        }).catch(err=>{
+          alert("No se pudo iniciar sesion")
+        })
+          
       
     }else{
       if(localStorage){
