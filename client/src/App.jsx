@@ -7,7 +7,7 @@ import CreateVideogame from './pages/CreateVideogame';
 import { useLoginStorage } from './helpers/useLoginStorage';
 import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { putUserAuth0 } from './redux/actions/userAction';
+import { loginAuth0, putUserAuth0 } from './redux/actions/userAction';
 import { useDispatch } from 'react-redux';
 
 
@@ -21,18 +21,24 @@ function App() {
   let login = ()=>{
     console.log(isAuthenticated);
     const localStorage = window.localStorage.getItem("userStorage");
-    if(isAuthenticated){
-      if(!localStorage){
+    if(isAuthenticated & !localStorage){
         let userLogin = {
           name: user.name,
           email: user.email,
           imagePerfil: user.picture
         }
 
-        window.localStorage.setItem("userStorage", JSON.stringify(userLogin));
         console.log("Entraron a 1");
-        dispatch(putUserAuth0(userLogin))
-      }
+        dispatch(
+          loginAuth0(userLogin)
+          .then(res=>{
+            window.localStorage.setItem("userStorage", JSON.stringify(res));
+            dispatch(putUserAuth0(res))
+          }).catch(err=>{
+            alert("No se pudo iniciar sesion")
+          })
+          )
+      
     }else{
       if(localStorage){
         let userLogin = JSON.parse(localStorage)
