@@ -3,9 +3,12 @@ import LoadingCard from "./LoadingCard";
 import { NavLink } from "react-router-dom";
 import { ReactComponent  as Favorite } from "../../../../assets/favorite_FILL1_wght400_GRAD0_opsz40.svg"
 import { ReactComponent  as Favorite0 } from "../../../../assets/favorite_FILL0_wght400_GRAD0_opsz40.svg"
+import { addFavoriteVideogame, deleteFavoriteVideogame } from "../../../../redux/actions/userAction";
+import { useSelector } from "react-redux";
 
 export default function CardVideogames(props) {
   const [isLoading, setIsLoading] = useState(true);
+  let user = useSelector(state=>state.userAuth0)
 
   const handleImageLoad = () => {
     console.log("Entra al handle img");
@@ -19,6 +22,19 @@ export default function CardVideogames(props) {
       name: name
     }
   }).slice(0,2)
+
+  let addFavorite = ()=>{
+    let config = {
+      userId: user.id,
+      videogameId: props.id
+    }
+    deleteFavoriteVideogame(config)
+    .then(res=>{
+      alert(res)
+    }).catch(err=>{
+      alert(err)
+    })
+  }
 
   let classCard = `card my-2 mx-2 flex-auto w-auto min-h-[320px] max-h-[350px] max-w-[300px] min-w-[300px]  text-blanco bg-gris  bg-base-100 shadow-xl
   md:my-3 md:mx-3 sm:my-2 sm:mx-2 rounded-md md:max-w-[280px] md:min-w-[280px]`
@@ -49,17 +65,17 @@ export default function CardVideogames(props) {
               {props.name}
             </h2>
 
-            <div className="w-[20%] ml-[5%]">
+            <div onClick={addFavorite} className="w-[20%] ml-[5%]">
               <div className="flex justify-center items-center absolute top-2 right-4 w-[40px] h-[40px] bg-blanco/20 border filter blur-[4] cursor-pointer rounded-full" >
-                {/* <Favorite           
+                <Favorite           
                   width={30}
                   height={30}
-                  fill="#D1C926"/> */}
+                  fill="rgb(230,230,230)"/>
 
-                <Favorite0          
+                {/* <Favorite0          
                   width={30}
                   height={30}
-                  fill="rgb(4, 4, 4, 0.8)"/>                  
+                  fill="rgb(4, 4, 4, 0.8)"/>                   */}
               </div>
             </div>
           </div>

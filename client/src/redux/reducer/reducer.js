@@ -13,6 +13,7 @@ const initialState = {
     TotalCount: 0,
     result: []
   },
+  allFavorites: [],
 
   configFilterVideogames: {
     page: 1,
@@ -43,6 +44,12 @@ const initialState = {
         return {
           ...state,
           allVideogames: action.payload
+        }
+
+      case CONSTANTS.GET_ALL_FAVORITES:
+        return{
+          ...state,
+          allFavorites: action.payload
         }
 
       case CONSTANTS.FILTERS:

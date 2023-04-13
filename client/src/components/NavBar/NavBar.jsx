@@ -8,6 +8,7 @@ import Logout from "../Login/Logout";
 import missingAvatar from "../../assets/Missing_avatar.svg.png"
 import { useAuth0 } from "@auth0/auth0-react";
 import Login from "../Login/Login";
+import { NavLink } from "react-router-dom";
 
 export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
   const [isHovered, setIsHovered] = useState(false);
@@ -95,24 +96,27 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
         </form>
 
         {/*Carrito*/}
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle">
-            <div className="indicator ml-[2px] ">
-              <img src={favoritos}/>
-              {countFav && favoriteNum(countFav)}
-            </div>
-          </label>
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle">
+              <div className="indicator ml-[2px] ">
+                <img src={favoritos}/>
+                {countFav && favoriteNum(countFav)}
+              </div>
+            </label>
 
-          <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow ">
-            <div className="card-body">
-              <span className="font-bold text-oscuro text-lg">{`8 Items`}</span>
-              <span className="text-info">Subtotal: $999</span>
-              <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
+            <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow ">
+              <div className="card-body">
+                <span className="font-bold text-oscuro text-lg">{`8 Items`}</span>
+                <span className="text-info">Subtotal: $999</span>
+                <div className="card-actions">
+                  <NavLink className="w-full" to={"/profile/favorites"}>
+                    <button className="btn btn-primary btn-block">View cart</button>
+                  </NavLink>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+
         
         {/* Perfil */}
         <div className="dropdown dropdown-end ">
@@ -129,12 +133,19 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame}) {
             {userAuth0?.imagePerfil? (
               <>
                 <li className="text-oscuro">
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
+                  <NavLink className="w-full" to={"/profile"}>
+                    <a className="justify-between">
+                      Profile
+                      <span className="badge ml-4">New</span>
+                    </a>
+                  </NavLink>
+
                 </li>
-                <li className="text-oscuro"><a>Settings</a></li>
+                <li className="text-oscuro">
+                  <NavLink to={"/profile/favorites"}>
+                    <a>Favorites</a>
+                  </NavLink>
+                  </li>
                 <li className="text-oscuro">
                   <Logout/>
                 </li>

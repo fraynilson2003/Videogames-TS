@@ -147,7 +147,7 @@ export const removeFavoriteVideogame = async (req: Request, res: Response) => {
 
 export const getAllVideoggamesFavorite = async (req: Request, res: Response) => {
   try {
-    let userId: number = Number(req.body.userId)
+    let userId: number = Number(req.query.userId)
 
     let result = await getAllFavoritesVideo_S(userId)
 

@@ -7,19 +7,28 @@ import CreateVideogame from './pages/CreateVideogame';
 import { useLoginStorage } from './helpers/useLoginStorage';
 import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { loginAuth0, putUserAuth0 } from './redux/actions/userAction';
-import { useDispatch } from 'react-redux';
+import { getFavoritesVideogames, loginAuth0, putUserAuth0 } from './redux/actions/userAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 axios.defaults.baseURL = "https://videogames-ts-production.up.railway.app/"
 
 function App() {
   let dispatch = useDispatch()
-
   const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0()
   
-  let login = ()=>{
-    console.log(isAuthenticated);
+  let getFavorites = (id)=>{
+    getFavoritesVideogames(id)
+    .then(res=>{
+      console.log((res.payload));
+      dispatch(res)
+    }).catch(err=>{
+      alert(err)
+    })
+
+  }
+
+  useEffect(()=>{
     const localStorage = window.localStorage.getItem("userStorage");
     if(isAuthenticated & !localStorage){
         let userLogin = {
@@ -34,27 +43,20 @@ function App() {
         .then(res=>{
           window.localStorage.setItem("userStorage", JSON.stringify(res));
           dispatch(putUserAuth0(res))
+          getFavorites(res.id)
         }).catch(err=>{
           alert("No se pudo iniciar sesion")
         })
           
-      
-    }else{
+    }else if(localStorage){
       if(localStorage){
         let userLogin = JSON.parse(localStorage)
         console.log("Entraron a 2");
   
         dispatch(putUserAuth0(userLogin))
+        getFavorites(userLogin.id)
       }
     }
-  }
-  
-  useEffect(()=>{
-    login()
-  }, [isAuthenticated])
-
-  useEffect(()=>{
-    login()
   }, [])
   return (
     <div className='App w-full min-w-full md:h-[2000px] '>

@@ -105,23 +105,14 @@ export let validateAddFavoriteVideogame = [
 ]
 
 export let validateGetFavoriteVideogames = [
-    check("userId").exists().isInt(),
-
-    check().custom((value, { req }) => {
-        const unknownFields = Object.keys(req.body).filter(key => ![
-            "userId"
-        ].includes(key));
-        if (unknownFields.length > 0) {
-          throw new Error(`Unknown fields: ${unknownFields.join(', ')}`);
-        }
-        return true;
-      }),
-
+    query("userId").exists().isInt(),
 
     (req: Request, res: Response, next: NextFunction)=>{
         validateResult(req , res , next)
     }
 ]
+
+
 
 export let validateGetIdVideo = [
     param("userId").exists().isInt(),
