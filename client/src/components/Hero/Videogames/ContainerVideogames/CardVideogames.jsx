@@ -3,18 +3,24 @@ import LoadingCard from "./LoadingCard";
 import { NavLink } from "react-router-dom";
 import { ReactComponent  as Favorite } from "../../../../assets/favorite_FILL1_wght400_GRAD0_opsz40.svg"
 import { ReactComponent  as Favorite0 } from "../../../../assets/favorite_FILL0_wght400_GRAD0_opsz40.svg"
-import { addFavoriteVideogame, deleteFavoriteVideogame } from "../../../../redux/actions/userAction";
-import { useSelector } from "react-redux";
+import { addFavoriteVideogame, deleteFavoriteVideogame, putReduxFavorite } from "../../../../redux/actions/userAction";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function CardVideogames(props) {
+export default function CardVideogames({ props, active, favorites }) {
+  let dispatch = useDispatch()
+  let [favoriteBoolean, setFavoriteBoolean] = useState(active)
+
+
   const [isLoading, setIsLoading] = useState(true);
   let user = useSelector(state=>state.userAuth0)
+
 
   const handleImageLoad = () => {
     console.log("Entra al handle img");
     setIsLoading(false);
   };
 
+  //clean name gender
   let Genders = props.Genders.map((g)=>{
     let name = g.name.split(" ")[0]
     return {
@@ -23,15 +29,46 @@ export default function CardVideogames(props) {
     }
   }).slice(0,2)
 
-  let addFavorite = ()=>{
+  let addRedux = ()=>{
+    let newRedux = [props, ...favorites]
+    dispatch(putReduxFavorite(newRedux))
+  } 
+
+  let deleteRedux = ()=>{
+    let newRedux = favorites.filter(ele=>ele.id !== props.id)
+    dispatch(putReduxFavorite(newRedux))
+  } 
+
+  let handleAddFavorite = ()=>{
     let config = {
       userId: user.id,
       videogameId: props.id
     }
+    setFavoriteBoolean(true)
+    addFavoriteVideogame(config)
+    .then(res=>{
+      console.log("agregado correctamente");
+      addRedux()
+
+    }).catch(err=>{
+      setFavoriteBoolean(false)
+      alert(err)
+    })
+  }
+
+  
+  let handleDeleteFavorite = ()=>{
+    let config = {
+      userId: user.id,
+      videogameId: props.id
+    }
+    setFavoriteBoolean(false)
     deleteFavoriteVideogame(config)
     .then(res=>{
-      alert(res)
+      console.log("elimiando correctamente");
+      deleteRedux()
     }).catch(err=>{
+      setFavoriteBoolean(true)
       alert(err)
     })
   }
@@ -52,7 +89,7 @@ export default function CardVideogames(props) {
         md:max-w-[280px] md:min-w-[280px]">
           <img 
           className="object-cover h-full w-full"  
-          src={props.img}
+          src={props.background_image}
           onLoad={handleImageLoad}/>
 
 
@@ -65,17 +102,23 @@ export default function CardVideogames(props) {
               {props.name}
             </h2>
 
-            <div onClick={addFavorite} className="w-[20%] ml-[5%]">
+            <div  className="w-[20%] ml-[5%]">
               <div className="flex justify-center items-center absolute top-2 right-4 w-[40px] h-[40px] bg-blanco/20 border filter blur-[4] cursor-pointer rounded-full" >
-                <Favorite           
+                {favoriteBoolean?(
+                  <Favorite 
+                  onClick={handleDeleteFavorite}          
                   width={30}
                   height={30}
                   fill="rgb(230,230,230)"/>
-
-                {/* <Favorite0          
+                ):(
+                <Favorite0      
+                  onClick={handleAddFavorite}             
                   width={30}
                   height={30}
-                  fill="rgb(4, 4, 4, 0.8)"/>                   */}
+                  fill="rgb(4, 4, 4, 0.8)"/>
+                )}
+        
+
               </div>
             </div>
           </div>

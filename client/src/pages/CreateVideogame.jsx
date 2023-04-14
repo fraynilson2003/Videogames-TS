@@ -3,6 +3,7 @@ import FormVideogame from '../forms/FormVideogame'
 import { NavLink } from 'react-router-dom'
 import { getAllGenders } from '../redux/actions/actions'
 import { useDispatch } from 'react-redux'
+import Home from './Home'
 
 export default function CreateVideogame() {
 
@@ -12,6 +13,10 @@ export default function CreateVideogame() {
     dispatch(getAllGenders())
   },[])
   return (
+    <>
+    <div className="hidden">
+      <Home/>
+    </div>
     <div className='flex  w-full  min-w-full h-full min-h-[100vh] pb-10'>
 
       <div className='container'>
@@ -27,6 +32,7 @@ export default function CreateVideogame() {
       </div>
 
     </div>
+    </>
 
   )
 }

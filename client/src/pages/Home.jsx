@@ -14,7 +14,6 @@ export default function Home() {
       isLoadingVideogame={isLoadingVideogame}
       setIsLoadingVideogame={setIsLoadingVideogame}/>
 
-      <Logout/>
 
       <Hero      
       isLoadingVideogame={isLoadingVideogame}

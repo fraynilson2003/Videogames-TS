@@ -8,6 +8,9 @@ import { getAllVideogames } from '../../../../redux/actions/actions'
 let CardVideogame = lazy(()=>import('./CardVideogames'))
 
 export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVideogame}) {
+  let favorites = useSelector(state=>state.allFavorites)
+  let idFavorites = favorites.map(ele=>ele.id)
+
 
   let dispatch = useDispatch()
   let videogames = useSelector(state =>state.allVideogames)
@@ -52,14 +55,16 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
             <Spinner/>
           </div>
         ):(
-          videogames.result?.length > 0? videogames.result.map((vid, ind)=>
-            <CardVideogames
+          videogames.result?.length > 0? videogames.result.map((vid, ind)=>{
+            let active = idFavorites.includes(vid.id)
+
+            return <CardVideogames
               key={ind}
-              id={vid.id}
-              name={vid.name}
-              Genders={vid.Genders}
-              img={vid.background_image}
-            />):(
+              props={vid}
+              favorites={favorites}
+              active={active}
+            />
+          }):(
               <div className='w-full pt-40'>
                 <h2 className='font-primary font-semibold text-3xl'>Sin resultados</h2> 
               </div>

@@ -78,3 +78,11 @@ export const deleteFavoriteVideogame = async(config)=>{
     throw new Error(error.message)
   }
 }
+
+/*************  UPDATE ********************* */
+export const putReduxFavorite = (videogames)=>{
+  return {
+    type: CONSTANTS.ADD_REDUX_FAVORITE,
+    payload: videogames
+  }
+}

@@ -74,6 +74,13 @@ const initialState = {
           }
         }
 
+      //PUT REDUX STATE CLIENT
+      case CONSTANTS.ADD_REDUX_FAVORITE:
+        return {
+          ...state,
+          allFavorites: action.payload
+        }
+
       default:
         return {
           ...state,
