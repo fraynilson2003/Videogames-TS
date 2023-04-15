@@ -1,11 +1,9 @@
 import { orderDb } from "../interfaces/SequelizeProp";
 import { UserEnum, UserInterface, UserQuery } from "../interfaces/User";
 import User from "../models/User";
-import { Request } from 'express';
 import { Op } from 'sequelize';
-import { getAllVideogames_S } from './videogames';
 import Videogame from '../models/Videogames';
-import { deleteVideogame } from '../controllers/videogames';
+import Gender from "../models/Gender";
 
 export let getAllUsers_S = async(reqQuery: UserQuery)=>{
   try {
@@ -174,7 +172,17 @@ export let getAllFavoritesVideo_S = async(userId: number)=>{
   try {
 
     let user = await User.findByPk(userId)
-    let videogames = await user?.getVideogames()
+    let videogames = await user?.getVideogames({
+      include: [
+        {
+          model: Gender,
+          as: "Genders",
+          through: { 
+            attributes:[]
+          }
+        }
+      ]
+    })
 
     //limpiamos
     videogames?.forEach(vid=>{

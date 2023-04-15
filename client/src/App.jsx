@@ -93,7 +93,9 @@ function App() {
   return (
     <div className='App w-full min-w-full md:h-[2000px] '>
       <Routes>
+        
         <Route exact path="/" element={<Home/>}/>
+
 
         <Route exact path="/detail/:idVideogame" element={<VideogameDetail/>}/>
 

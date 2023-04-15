@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import CardVideogames from './CardVideogames'
-import Paginado from '../Paginado'
-import Spinner from '../../../../extras/Spinner'
-import { getAllVideogames } from '../../../../redux/actions/actions'
+import CardVideogames from '../Hero/Videogames/ContainerVideogames/CardVideogames' 
+import Paginado from '../Hero/Videogames/Paginado' 
+import Spinner from '../../extras/Spinner' 
+import { getAllVideogames } from '../../redux/actions/actions'
 
 
-export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVideogame}) {
+export default function FavoriteVideogames({isLoadingVideogame, setIsLoadingVideogame}) {
   let favorites = useSelector(state=>state.allFavorites)
   let idFavorites = favorites.map(ele=>ele.id)
 
@@ -22,19 +22,9 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
   }
 
   useEffect(()=>{
-    if(videogames.result?.length){
-      //setIsLoadingVideogame(false)
-    }else{
-      setIsLoadingVideogame(true)
-      let res = getAllVideogames().then((res)=>{
-        dispatch(res)
-        setIsLoadingVideogame(false)
-      }).catch(err=>{
-        alert(err)
-      })
+    if(favorites?.length){
+      setIsLoadingVideogame(false)
     }
-
-
   }, [])
 
   return (
@@ -43,10 +33,6 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
 
       <p  id="ContainerVideogames" className='font-primary text-2xl pb-2 mr-2 text-start pl-6 pt-1
       md:pt-4'>Videogoames <span className='font-semibold text-2xl '>{`${totalVideogames}`}</span> </p>
-
-      <Paginado
-      isLoadingVideogame={isLoadingVideogame}
-      setIsLoadingVideogame={setIsLoadingVideogame}/>
 
       <div className='flex flex-row flex-wrap justify-around min-h-[600px] box-border h-auto w-auto'>
         {isLoadingVideogame? (
@@ -73,9 +59,7 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
 
       </div>  
 
-      <Paginado
-      isLoadingVideogame={isLoadingVideogame}
-      setIsLoadingVideogame={setIsLoadingVideogame}/>
+
 
 
     </div>
