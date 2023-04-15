@@ -13,6 +13,8 @@ export default function Profile() {
           isLoadingImg={false}/>
 
         <AsideUser/>
+
+ 
     </>
   
   )
