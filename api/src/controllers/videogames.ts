@@ -10,9 +10,10 @@ import {
 } from '../handlers/videogames';
 import { trimObject } from "../helpers/trimProperties";
 import { uploadImg } from '../utils/cloudinary';
-import Videogame from '../models/Videogames';
 import * as fs from 'fs/promises'
 import { PathLike } from "fs";
+import Videogame from '../models/Videogames';
+import { updateImgProduct } from "../services/stripe";
 
 
 export const getVideoGames = async(req: Request, res: Response)=>{
@@ -95,6 +96,11 @@ export const putVideogameImg = async(req: Request, res: Response)=>{
     propertysVid.id_background_image = resultImg.public_id;
 
     let result = await updateVideogame(propertysVid)
+
+    //img stripe
+    let vid = await Videogame.findByPk(propertysVid.id)
+    let putImg = await updateImgProduct(String(vid?.stripeProductId), String(vid?.background_image))   
+
 
     //delete img
     let path: PathLike = `${String(fileImage?.image?.tempFilePath)}`

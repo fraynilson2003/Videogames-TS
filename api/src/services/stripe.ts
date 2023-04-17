@@ -21,7 +21,7 @@ const stripe = new Stripe(String(STRIPE_SECRET_KEY), config)
 
 
 //la sesion es la instancia de pago
-export async function createSession(priceId: Stripe.Price, idProductDB: string) {
+export async function createSession(priceId: string, idProductDB: string, userId: string) {
   // se crea una sesion por cada llamada a la funcion
   try {
     const session = await stripe.checkout.sessions.create({
@@ -30,18 +30,18 @@ export async function createSession(priceId: Stripe.Price, idProductDB: string) 
       ],
       line_items: [
         {
-          price: priceId.id, //se requiere un priceId para la compra que esta linkeado con su producto
+          price: priceId, //se requiere un priceId para la compra que esta linkeado con su producto
           quantity: 1, //siempre la cantidad es 1 porque solo compran 1 servicio
         },
       ],
       metadata: {
-        name: idProductDB,
+        name: `${idProductDB}/${userId}`,
       },
 
       mode: "payment", // tipo de pago, como no es recurrente es payment
 
-      success_url: `${FRONT_BASE_URL}stripe/success`, // si el pago es exitoso se redirige aqui
-      cancel_url: `${FRONT_BASE_URL}stripe/fail`, // si el pago es cancelado o fallo redirige aqui
+      success_url: `${FRONT_BASE_URL}/profile/purchased`, // si el pago es exitoso se redirige aqui
+      cancel_url: `${FRONT_BASE_URL}/stripe/fail`, // si el pago es cancelado o fallo redirige aqui
     })
 
     return session; // en sesion viene la url que da stripe para el formulario y se pueda realizar el pago
@@ -99,6 +99,22 @@ export async function createProduct(name: string) {
     });
 
     return newProduct; //nos retorna el objeto completo donde viene el Id del producto para despues añadir precios
+  } catch (error) {
+    let {message}: any = error
+    throw new Error(message) ;
+  }
+}
+
+export async function updateImgProduct(productId: string, imageUrl: string) {
+  console.log("******************************");
+  console.log("ENTRA A PUT IMG");
+  try {
+
+    let res = await stripe.products.update(productId, {
+      images: [imageUrl],
+    });
+
+    return res; //nos retorna el objeto completo donde viene el Id del producto para despues añadir precios
   } catch (error) {
     let {message}: any = error
     throw new Error(message) ;

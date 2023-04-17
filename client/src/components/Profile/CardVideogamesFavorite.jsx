@@ -122,12 +122,27 @@ export default function CardVideogamesFavorite({ props, favorites }) {
             </div>
           </div>
 
+          {/* Price */}
+          <div className="flex flex-row items-end flex-1 relative w-full justify-end ">
+            <div className="flex items-center w-[50%]  h-[40px]">
+              <h2 className="text-2xl w-[80px] font-bold font-primary rounded-xl  text-blanco px-[7px] py-[2px] border-blanco border-[1px]">
+                {`$ ${props.price}`}
+              </h2>
+            </div>
+
+            <div className="w-[50%] flex justify-end items-center h-[40px]">
+                <div className="w-[70px] cursor-pointer rounded-lg py-1 brightness-75 bg-verde border-[1px] hover:brightness-100 ">
+                  <h2 className="text-center text-lg font-semibold font-primary">Buy</h2>
+                </div>
+            </div>
+          </div>
+
 
           {/* Generos */}
 
           <div className="card-actions justify-end pb-2">
             {Genders.length? (Genders.map((g)=>
-              <div className="badge badge-outline text-sm px-2">{g.name}</div>
+              <div className="badge badge-outline select-none text-sm px-2">{g.name}</div>
             )):<></>}
           </div>
         </div>

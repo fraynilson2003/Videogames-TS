@@ -106,26 +106,16 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
         </form>
 
         {/*Carrito*/}
-          <div className="dropdown dropdown-end">
+        <NavLink to={"/profile/favorites"}>
+          <div className="">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator ml-[2px] ">
                 <img src={favoritos}/>
                 {countFav && favoriteNum(countFav)}
               </div>
             </label>
-
-            <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow ">
-              <div className="card-body">
-                <span className="font-bold text-oscuro text-lg">{`8 Items`}</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <NavLink className="w-full" to={"/profile/favorites"}>
-                    <button className="btn btn-primary btn-block">View cart</button>
-                  </NavLink>
-                </div>
-              </div>
-            </div>
           </div>
+        </NavLink>
 
 
         {/* Perfil */}

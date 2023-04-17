@@ -8,8 +8,8 @@ export default function FavoriteVideogames({isLoadingVideogame, setIsLoadingVide
   let favorites = useSelector(state=>state.allFavorites)
 
   let totalFavorites = ""
-  if(favorites?.TotalCount && favorites.TotalCount > 0){
-    totalFavorites = `${favorites.TotalCount} favorites`
+  if(favorites?.totalCount && favorites.totalCount > 0){
+    totalFavorites = `${favorites.totalCount} favorites`
   }else{
     totalFavorites = ""
   }
@@ -24,8 +24,8 @@ export default function FavoriteVideogames({isLoadingVideogame, setIsLoadingVide
     <div className='flex flex-col justify-start items-center   pb-[40px] rounded-none
     md:rounded-md md:bg-fondo'>
 
-      <p  id="ContainerVideogames" className='font-primary text-2xl pb-2 mr-2 text-start pl-6 pt-1
-      md:pt-4'>{totalFavorites}</p>
+      <p  id="ContainerVideogames" className='font-primary w-full text-blanco text-2xl pb-2 mr-2 text-start pl-6 pt-1
+      md:pt-4 md:text-left md:px-10'>{totalFavorites}</p>
 
       <div className='flex flex-row flex-wrap justify-around min-h-[600px] box-border h-auto w-auto'>
         {isLoadingVideogame? (

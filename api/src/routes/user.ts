@@ -1,4 +1,4 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
 import * as userController from '../controllers/user';
 import * as V from '../validators/user';
 

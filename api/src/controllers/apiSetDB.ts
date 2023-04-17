@@ -14,6 +14,7 @@ import Videogame from '../models/Videogames';
 import fs from 'fs';
 import { setVideogames } from '../handlers/videogames';
 import { awaitSeconds } from '../helpers/awaitSeconds';
+import { updateImgProduct } from '../services/stripe';
 
 
 let lorem = "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure"
@@ -60,6 +61,7 @@ export const setVideogamesDB = async(req: Request, res: Response)=>{
  
       await awaitSeconds(5)
       let res = await setVideogames(vid)
+    let putImg = await updateImgProduct(String(res?.stripeProductId), String(res?.background_image))   
       return res
     });
     

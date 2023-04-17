@@ -151,7 +151,7 @@ export let setVideogames = async(videogame: VideogameInterface)=>{
 
     //create product stripe
     let productStripe = await createProduct(String(videogame.name))
-
+    
     let priceProduct: number
     if(!videogame.price || videogame.price === 0){
       priceProduct = numberRandom()
