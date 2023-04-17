@@ -6,17 +6,19 @@ import pinoHttp from 'pino-http';
 import fileupload from "express-fileupload"
 import { router } from "./routes/index"
 import morgan from "morgan";
+import { eventListenComplete } from './services/stripe';
 
 // crear app
 const app = express()
 
-//configurar midelware
-let logger = pinoHttp();
 
-//app.use(logger); // Usar el middleware pino-http
-app.use(cors(
-  
-))
+
+//webhook
+let router2 = express.Router()
+router2.post("/stripe/webhook", express.raw({type: 'application/json'}), eventListenComplete)
+app.use('/', router2);
+
+app.use(cors())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(morgan("dev"))
@@ -25,7 +27,10 @@ app.use(fileupload({
   tempFileDir: "./uploads"
 }))
 
-//webhook
+
+
+
+//routes
 app.use(router);
 
 

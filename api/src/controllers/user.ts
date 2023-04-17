@@ -8,7 +8,7 @@ import {
   setUser_S, updateUser_S,
   getAllFavoritesVideo_S, getUserId_S,
   removeFavoriteVideogame_S
-} from '../services/user';
+} from '../handlers/user';
 
 
 export const getUsers = async (req: Request, res: Response) => {

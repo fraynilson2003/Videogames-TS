@@ -4,6 +4,8 @@ import { Op } from 'sequelize';
 import Videogame from "../models/Videogames";
 import Gender from '../models/Gender';
 import { orderDb } from '../interfaces/SequelizeProp';
+import { createPrice, createProduct } from "../services/stripe";
+import { numberRandom } from '../helpers/numberRandom';
 
 export let getAllVideogames_S = async(reqQuery: VideogameQuery)=>{
   try {
@@ -146,6 +148,22 @@ export let setVideogames = async(videogame: VideogameInterface)=>{
       idGenders = [...videogame.genders]
       delete videogame.genders
     }
+
+    //create product stripe
+    let productStripe = await createProduct(String(videogame.name))
+
+    let priceProduct: number
+    if(!videogame.price || videogame.price === 0){
+      priceProduct = numberRandom()
+      videogame.price = priceProduct
+    }
+    else priceProduct = videogame.price
+
+    let priceStripe = await createPrice(priceProduct, productStripe)
+
+    //add new atributes
+    videogame.stripeProductId = productStripe.id
+    videogame.sripePriceId = priceStripe.id
 
     let newVideoG = await Videogame.create({...videogame})
     let videoAddGender = await newVideoG.setGenders(idGenders)

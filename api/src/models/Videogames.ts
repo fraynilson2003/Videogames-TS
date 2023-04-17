@@ -27,6 +27,11 @@ class Videogame extends Model {
   public released?: string
   public background_image?: string
   public gender?: string
+  //stripe
+  public price?: number
+  public stripeProductId?: string
+  public sripePriceId?: string
+  public stripeSesionId?: string
 
   // Genders association methods
   public addGender!: BelongsToManyAddAssociationMixin<Gender, number>
@@ -89,16 +94,20 @@ class Videogame extends Model {
       name: {
         type: DataTypes.STRING,
         allowNull: false
-  
       },
       description: {
           type: DataTypes.TEXT,
-  
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull: false
       },
       background_image: {
           type: DataTypes.TEXT,
           defaultValue: "none"
       },
+
       id_background_image: {
         type: DataTypes.TEXT,
         defaultValue: "none"
@@ -107,7 +116,18 @@ class Videogame extends Model {
           type: DataTypes.DATEONLY,
           defaultValue: Sequelize.fn('date', Sequelize.fn('now')),
           allowNull: false
-      }
+      },
+
+      //stripe
+      stripeProductId:{
+        type: DataTypes.TEXT
+      },
+      sripePriceId: {
+        type: DataTypes.TEXT
+      },
+      stripeSesionId:{
+        type: DataTypes.TEXT
+      },
     }, {
       sequelize: sequelize,
       modelName: 'Videogame',

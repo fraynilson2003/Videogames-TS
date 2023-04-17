@@ -12,6 +12,8 @@ import { VideogameInterface } from '../interfaces/Videogames';
 import Gender from '../models/Gender';
 import Videogame from '../models/Videogames';
 import fs from 'fs';
+import { setVideogames } from '../handlers/videogames';
+import { awaitSeconds } from '../helpers/awaitSeconds';
 
 
 let lorem = "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure"
@@ -24,7 +26,7 @@ export const getAllPageAPI = async(pageNu: number[])=>{
       params: {
         key: MY_KEY_API,
         page: page, //numero de pagina
-        page_size: 20,
+        page_size: 10,
       }}
   ).then((res)=>res.data.results.map((vid: any)=>{
     let modiVideogame: VideogameInterface = {
@@ -51,18 +53,14 @@ export const getAllPageAPI = async(pageNu: number[])=>{
 
 export const setVideogamesDB = async(req: Request, res: Response)=>{
   try {
-    let APIPromise = await getAllPageAPI([1,2,3,4,5])
+    let pages: number[] = req.body.pages
+    let APIPromise = await getAllPageAPI(pages)
 
-    let setPromise = APIPromise.map(async(vid: VideogameInterface, ind: number) => {
-      let idGenders: number[] = []
-      if(vid.genders){
-        idGenders = [...vid.genders]
-        delete vid.genders
-      }
+    let setPromise = APIPromise.map(async(vid: VideogameInterface) => {
  
-      let newVideoG = await Videogame.create({...vid})
-      let videoAddGender = await newVideoG.setGenders(idGenders)
-      return videoAddGender
+      await awaitSeconds(5)
+      let res = await setVideogames(vid)
+      return res
     });
     
     return res.status(202).json({

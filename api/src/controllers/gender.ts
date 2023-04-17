@@ -7,7 +7,7 @@ import {
   updateGender, 
   deleteGenderS, 
   getGenderById_S 
-} from '../services/gender';
+} from '../handlers/gender';
 import { trimObject } from '../helpers/trimProperties';
 
 export const getGenders = async(req: Request, res: Response)=>{

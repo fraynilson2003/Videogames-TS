@@ -7,7 +7,7 @@ import {
   updateVideogame,
   getAllVideogames_S,
   getVideogameById_S
-} from '../services/videogames';
+} from '../handlers/videogames';
 import { trimObject } from "../helpers/trimProperties";
 import { uploadImg } from '../utils/cloudinary';
 import Videogame from '../models/Videogames';
