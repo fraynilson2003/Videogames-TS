@@ -50,7 +50,7 @@ export const getFavoritesVideogames = async(userId)=>{
 
     return {
       type: CONSTANTS.GET_ALL_FAVORITES,
-      payload: result.data?.result
+      payload: result.data
     }
 
   } catch (error) {

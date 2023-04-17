@@ -1,38 +1,31 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import CardVideogames from '../Hero/Videogames/ContainerVideogames/CardVideogames' 
-import Paginado from '../Hero/Videogames/Paginado' 
+import { useSelector } from 'react-redux'
 import Spinner from '../../extras/Spinner' 
-import { getAllVideogames } from '../../redux/actions/actions'
+import CardVideogamesFavorite from './CardVideogamesFavorite'
 
 
 export default function FavoriteVideogames({isLoadingVideogame, setIsLoadingVideogame}) {
   let favorites = useSelector(state=>state.allFavorites)
-  let idFavorites = favorites.map(ele=>ele.id)
 
-
-  let dispatch = useDispatch()
-  let videogames = useSelector(state =>state.allVideogames)
-
-  let totalVideogames = ""
-  if(videogames?.TotalCount && videogames.TotalCount > 0){
-    totalVideogames = `|    ${videogames.TotalCount} resultados`
+  let totalFavorites = ""
+  if(favorites?.TotalCount && favorites.TotalCount > 0){
+    totalFavorites = `${favorites.TotalCount} favorites`
   }else{
-    totalVideogames = ""
+    totalFavorites = ""
   }
 
   useEffect(()=>{
-    if(favorites?.length){
+    if(favorites.result?.length){
       setIsLoadingVideogame(false)
     }
-  }, [])
+  }, [favorites])
 
   return (
     <div className='flex flex-col justify-start items-center   pb-[40px] rounded-none
     md:rounded-md md:bg-fondo'>
 
       <p  id="ContainerVideogames" className='font-primary text-2xl pb-2 mr-2 text-start pl-6 pt-1
-      md:pt-4'>Videogoames <span className='font-semibold text-2xl '>{`${totalVideogames}`}</span> </p>
+      md:pt-4'>{totalFavorites}</p>
 
       <div className='flex flex-row flex-wrap justify-around min-h-[600px] box-border h-auto w-auto'>
         {isLoadingVideogame? (
@@ -40,14 +33,11 @@ export default function FavoriteVideogames({isLoadingVideogame, setIsLoadingVide
             <Spinner/>
           </div>
         ):(
-          videogames.result?.length > 0? videogames.result.map((vid, ind)=>{
-            let active = idFavorites.includes(vid.id)
-
-            return <CardVideogames
+          favorites.result?.length > 0? favorites.result.map((vid, ind)=>{
+            return <CardVideogamesFavorite
               key={ind}
               props={vid}
               favorites={favorites}
-              active={active}
             />
           }):(
               <div className='w-full pt-40'>

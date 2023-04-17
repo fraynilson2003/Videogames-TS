@@ -8,7 +8,6 @@ import { getAllVideogames } from '../../../../redux/actions/actions'
 
 export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVideogame}) {
   let favorites = useSelector(state=>state.allFavorites)
-  let idFavorites = favorites.map(ele=>ele.id)
 
 
   let dispatch = useDispatch()
@@ -55,7 +54,7 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
           </div>
         ):(
           videogames.result?.length > 0? videogames.result.map((vid, ind)=>{
-            let active = idFavorites.includes(vid.id)
+            let active = favorites.result?.map(ele=>ele.id).includes(vid.id)
 
             return <CardVideogames
               key={ind}

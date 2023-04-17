@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import MyData from './MyData'
-import Favorites from './Favorites'
+import FavoriteVideogames from './FavoriteVideogames'
 
 export default function AsideUser() {
-  let userAuth0 = useSelector((state)=>state.userAuth0)
+  let [isLoadingVideogame, setIsLoadingVideogame] = useState(true)
 
   let { option } = useParams()
 
@@ -19,7 +19,6 @@ export default function AsideUser() {
     }else{
       return ""
     }
-
   }
 
   let changeSelect = (option)=>{
@@ -36,23 +35,23 @@ export default function AsideUser() {
     <div className='w-full h-12  py-0 px-4 bg-oscuro'>
       <div className='relative h-full flex flex-row items-center justify-center md:justify-start  text-blanco overflow-hidden'>
 
-        <div 
+        <NavLink to={"/profile"} 
         onClick={()=>changeSelect("myData")} 
         className={`relative ${category == "myData"? "text-oscuro bg-blanco" : ""} top-2 mx-2 pt-1 pb-2 px-3 rounded-t cursor-pointer hover:bg-blanco hover:text-oscuro`}>
           My data
-        </div>
+        </NavLink>
 
-        <div 
+        <NavLink to={"/profile/favorites"} 
         onClick={()=>changeSelect("favorites")} 
         className={`relative ${category == "favorites"? "text-oscuro bg-blanco" : ""} top-2 mx-2 pt-1 pb-2 px-3 rounded-t cursor-pointer hover:bg-blanco hover:text-oscuro`}>
           Favorites
-        </div>
+        </NavLink>
 
-        <div 
+        <NavLink to={"/profile/purchased"} 
         onClick={()=>changeSelect("purchased")} 
         className={`relative ${category == "purchased"? "text-oscuro bg-blanco" : ""} top-2 mx-2 pt-1 pb-2 px-3 rounded-t cursor-pointer hover:bg-blanco hover:text-oscuro`}>
           purchased
-        </div>
+        </NavLink>
 
 
 
@@ -62,14 +61,16 @@ export default function AsideUser() {
 
     <div className='w-full min-h-[600px] mt-0 bg-fondo border-t-[2px] border-blanco rounded-lg px-4'>
 
-      {category === "myData"?(
+
+      <div className={category === "myData"? "block" : "hidden" }>
         <MyData/>
-      ):<></>}
+      </div>
 
-      {category === "favorites"?(
-        <Favorites/>
-      ):<></>}
-
+      <div className={category === "favorites"? "block" : "hidden" }>
+      <FavoriteVideogames
+        isLoadingVideogame={isLoadingVideogame}
+        setIsLoadingVideogame={setIsLoadingVideogame}/>
+      </div>
 
     </div>
 

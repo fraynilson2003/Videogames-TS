@@ -1,14 +1,16 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
-import LoadingCard from "./LoadingCard";
-import { NavLink } from "react-router-dom";
-import { ReactComponent  as Favorite } from "../../../../assets/favorite_FILL1_wght400_GRAD0_opsz40.svg"
-import { ReactComponent  as Favorite0 } from "../../../../assets/favorite_FILL0_wght400_GRAD0_opsz40.svg"
-import { addFavoriteVideogame, deleteFavoriteVideogame, putReduxFavorite } from "../../../../redux/actions/userAction";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import LoadingCard from "../Hero/Videogames/ContainerVideogames/LoadingCard"; 
+import { ReactComponent  as Favorite } from "../../assets/favorite_FILL1_wght400_GRAD0_opsz40.svg"
+import { ReactComponent  as Favorite0 } from "../../assets/favorite_FILL0_wght400_GRAD0_opsz40.svg"
+import { addFavoriteVideogame, deleteFavoriteVideogame, putReduxFavorite } from "../../redux/actions/userAction";
 
-export default function CardVideogames({ props, active, favorites }) {
+export default function CardVideogamesFavorite({ props, favorites }) {
   let dispatch = useDispatch()
-  let [favoriteBoolean, setFavoriteBoolean] = useState(active)
+  let [favoriteBoolean, setFavoriteBoolean] = useState(true)
+
+
 
 
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +37,7 @@ export default function CardVideogames({ props, active, favorites }) {
   } 
 
   let deleteRedux = ()=>{
-    let newRedux = favorites.result.filter(ele=>ele.id !== props.id)
+    let newRedux = favorites.result?.filter(ele=>ele.id !== props.id)
     dispatch(putReduxFavorite(newRedux))
   } 
 
@@ -44,7 +46,6 @@ export default function CardVideogames({ props, active, favorites }) {
       userId: user.id,
       videogameId: props.id
     }
-    setFavoriteBoolean(true)
     addFavoriteVideogame(config)
     .then(res=>{
       console.log("agregado correctamente");
@@ -56,13 +57,11 @@ export default function CardVideogames({ props, active, favorites }) {
     })
   }
 
-  
   let handleDeleteFavorite = ()=>{
     let config = {
       userId: user.id,
       videogameId: props.id
     }
-    setFavoriteBoolean(false)
     deleteFavoriteVideogame(config)
     .then(res=>{
       console.log("elimiando correctamente");
@@ -85,7 +84,7 @@ export default function CardVideogames({ props, active, favorites }) {
 
       <div className={isLoading? classCardNonde : classCard}>
 
-        <NavLink to={`detail/${props.id}`} className=" relative h-[180px] min-h-[150px] max-w-[300px] min-w-[300px] overflow-hidden rounded-t-md 
+        <NavLink to={`/detail/${props.id}`} className=" relative h-[180px] min-h-[150px] max-w-[300px] min-w-[300px] overflow-hidden rounded-t-md 
         md:max-w-[280px] md:min-w-[280px]">
           <img 
           className="object-cover h-full w-full"  

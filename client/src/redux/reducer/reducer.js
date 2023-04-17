@@ -3,6 +3,8 @@ import { CONSTANTS } from "../actions/constant";
 
 
 const initialState = {
+  countNotify: 0,
+
   userAuth0: {},
   allGenders: [],
   videogameId: {},
@@ -13,7 +15,7 @@ const initialState = {
     TotalCount: 0,
     result: []
   },
-  allFavorites: [],
+  allFavorites: {},
 
   configFilterVideogames: {
     page: 1,
@@ -78,13 +80,21 @@ const initialState = {
       case CONSTANTS.ADD_REDUX_FAVORITE:
         return {
           ...state,
-          allFavorites: action.payload
+          allFavorites: {
+            ...state.allFavorites,
+            result: action.payload
+          }
+        }
+
+      case CONSTANTS.PUT_NEW_NOTIFY:
+        return {
+          ...state,
+          countNotify: action.payload
         }
 
       default:
         return {
-          ...state,
-
+          ...state
         }
     }
   }
