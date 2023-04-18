@@ -67,8 +67,10 @@ export async function eventListenComplete(req: Request, res: Response) {
         // Realizamos acciones específicas para cuando se recibe un evento de pago exitoso
         break;
       case 'checkout.session.completed':
+        const completed = event.data.object;
         console.log("************************************");
-        console.log("Pago Fallido");
+        console.log("Pago exitoso");
+        console.log(completed);
         
         
         break;
