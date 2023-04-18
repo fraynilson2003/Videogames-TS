@@ -53,13 +53,20 @@ export async function createSession(priceId: string, idProductDB: string, userId
 }
 
 /********** LISTEN PAGAR ********** */
+interface EventHook extends Stripe.Event {
+  data: {
+    object: {
+      metadata: any
+    }
+  }
+} 
+
 export async function eventListenComplete(req: Request, res: Response) {
 
   const sig = String(req.headers['stripe-signature'])
-  
 
   try {
-    let event = stripe.webhooks.constructEvent(req.body, sig, String(ENDPOINT_SECRET));
+    let event: Stripe.Event = stripe.webhooks.constructEvent(req.body, sig, String(ENDPOINT_SECRET));
 
 
     switch (event.type) {
@@ -70,7 +77,8 @@ export async function eventListenComplete(req: Request, res: Response) {
         const completed = event.data.object;
         console.log("************************************");
         console.log("Pago exitoso");
-        console.log(completed);
+        const {metadata}: any = completed
+        console.log(metadata);
         
         
         break;
