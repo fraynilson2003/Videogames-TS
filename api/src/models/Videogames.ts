@@ -52,10 +52,22 @@ class Videogame extends Model {
   // Populated for inclusions
   public readonly Genders?: Gender[]
 
+  // Users purchased association methods
+  public addBuyer!: BelongsToManyAddAssociationMixin<User, number>
+  public addBuyers!: BelongsToManyAddAssociationsMixin<User, number>
+  public countBuyer!: BelongsToManyCountAssociationsMixin
+  public createBuyer!: BelongsToManyCreateAssociationMixin<User>
 
+  public getBuyers!: BelongsToManyGetAssociationsMixin<User>
+  public removeBuyer!: BelongsToManyRemoveAssociationMixin<User, number>
+  public removeBuyers!: BelongsToManyRemoveAssociationsMixin<User, number>
 
+  public setBuyers!: BelongsToManySetAssociationsMixin<User, number>
 
-  // Users association methods
+  // Populated for inclusions
+  public readonly Buyers?: User[]
+
+  // Users favorite association methods
   public addUser!: BelongsToManyAddAssociationMixin<User, number>
   public addUsers!: BelongsToManyAddAssociationsMixin<User, number>
   public countUser!: BelongsToManyCountAssociationsMixin
@@ -72,12 +84,13 @@ class Videogame extends Model {
   public setUsers!: BelongsToManySetAssociationsMixin<User, number>
   
   // Populated for inclusions
-  public readonly Users?: Gender[]
+  public readonly Users?: User[]
 
   //Association
   public static associations: {
     Genders: Association<Gender, Videogame>
     Users: Association<User, Videogame>
+    Buyers: Association<User, Videogame>
   }
 
   public static initialize(sequelize: Sequelize) {

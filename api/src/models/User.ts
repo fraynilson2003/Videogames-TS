@@ -29,7 +29,7 @@ class User extends Model  {
   public edad?: number
   public created_at!: Date
 
-  // Videogames association methods
+  // Videogames favorite association methods
   public addVideogame!: BelongsToManyAddAssociationMixin<Videogame, number>
   public addVideogames!: BelongsToManyAddAssociationsMixin<Videogame, number>
   public countVideogames!: BelongsToManyCountAssociationsMixin
@@ -48,8 +48,25 @@ class User extends Model  {
   // Populated for inclusions
   public readonly Videogames?: Videogame[]
 
+  // Videogames purchased association methods
+  public addPurchased!: BelongsToManyAddAssociationMixin<Videogame, number>
+  public addPurchaseds!: BelongsToManyAddAssociationsMixin<Videogame, number>
+  public countPurchaseds!: BelongsToManyCountAssociationsMixin
+  public createPurchased!: BelongsToManyCreateAssociationMixin<Videogame>
+
+  public getPurchaseds!: BelongsToManyGetAssociationsMixin<Videogame>
+
+  public removePurchased!: BelongsToManyRemoveAssociationMixin<Videogame, number>
+  public removePurchaseds!: BelongsToManyRemoveAssociationsMixin<Videogame, number>
+
+  public setPurchaseds!: BelongsToManySetAssociationsMixin<Videogame, number>
+
+  // Populated for inclusions
+  public readonly Purchaseds?: Videogame[]
+
   public static associations: {
     Videogames: Association<User, Videogame>
+    Purchaseds: Association<User, Videogame>
   }
 
   public static initialize(sequelize: Sequelize) {

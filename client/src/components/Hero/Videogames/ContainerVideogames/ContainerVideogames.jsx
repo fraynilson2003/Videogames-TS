@@ -7,8 +7,8 @@ import { getAllVideogames } from '../../../../redux/actions/actions'
 
 
 export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVideogame}) {
-  let favorites = useSelector(state=>state.allFavorites)
   let userLogin = useSelector(state=>state.userAuth0) 
+  let favorites = useSelector(state=>state.allFavorites)
 
   let dispatch = useDispatch()
   let videogames = useSelector(state =>state.allVideogames)
@@ -52,23 +52,36 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
           <div className='w-full pt-40'>
             <Spinner/>
           </div>
-        ):(
-          videogames.result?.length > 0? videogames.result.map((vid, ind)=>{
-            let active = favorites.result?.map(ele=>ele.id).includes(vid.id)
+        ):<></>}
+        
+        {!isLoadingVideogame && favorites.status && videogames.result?.length > 0? (videogames.result.map((vid, ind)=>{
+          let active = favorites.result?.map(ele=>ele.id).includes(vid.id)
 
-            return <CardVideogames
-              key={ind}
-              idUser={userLogin.id}
-              props={vid}
-              favorites={favorites}
-              active={active}
-            />
-          }):(
-              <div className='w-full pt-40'>
-                <h2 className='font-primary font-semibold text-3xl'>Sin resultados</h2> 
-              </div>
-            )
-        )}
+          return <CardVideogames
+            key={ind}
+            idUser={userLogin.id}
+            props={vid}
+            favorites={favorites}
+            active={active}
+          />
+        })):<></> }
+
+        {!isLoadingVideogame && !favorites.status && videogames.result?.length > 0? (videogames.result.map((vid, ind)=>{
+          return <CardVideogames
+          key={ind}
+          idUser={userLogin.id}
+          props={vid}
+          favorites={favorites}
+          active={false}
+        />}          
+        )):<></>}
+      
+        {!isLoadingVideogame && !videogames.result?.length > 0? (
+          <div className='w-full pt-40'>
+            <h2 className='font-primary font-semibold text-3xl'>Sin resultados</h2> 
+          </div>
+        ):<></>}
+
 
 
       </div>  

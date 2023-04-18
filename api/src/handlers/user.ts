@@ -154,6 +154,38 @@ export let addFavoriteVideogame_S = async(userId: number, videogameId: number)=>
   }
 }
 
+export let addPurchasedVideogame_S = async(userId: number, videogameId: number)=>{
+  try {
+    let res = await User.findByPk(userId)
+    let resPurchased = await res?.addPurchased(videogameId)
+
+    let compro = await res?.getPurchaseds({
+      include: [
+        {
+          model: Gender,
+          as: "Genders",
+          through: { 
+            attributes:[]
+          }
+        }
+      ]
+    })
+
+
+    console.log("SALIO BIEN HASTA ADD PURCHASED");
+    
+
+    return {
+      resPurchased,
+      compro,
+    }
+  } catch (error) {
+    let {message}: any = error
+    console.log(message);
+    throw new Error(message)    
+  }
+}
+
 export let removeFavoriteVideogame_S = async(userId: number, videogameId: number)=>{
   try {
 
@@ -204,6 +236,46 @@ export let getAllFavoritesVideo_S = async(userId: number)=>{
       totalCount: totalCount,
       videogames: videogames
     }
+  } catch (error) {
+    let {message}: any = error
+    console.log(message);
+    throw new Error(message)
+  }
+}
+
+export let getAllPurchasedVid_S = async(userId: number)=>{
+  try {
+    let user = await User.findByPk(userId)
+
+    let buyers = await user?.getPurchaseds({
+      include: [
+        {
+          model: Gender,
+          as: "Genders",
+          through: { 
+            attributes:[]
+          }
+        }
+      ]
+    })  
+    
+    let totalCount = await Videogame.count({
+      include: {
+        model: User,
+        as: "Buyers",
+        where: {id: userId},
+        through: {
+          attributes: []
+        }
+      }
+    })
+
+    return {
+      totalCount: totalCount,
+      videogames: buyers
+    }
+
+
   } catch (error) {
     let {message}: any = error
     console.log(message);

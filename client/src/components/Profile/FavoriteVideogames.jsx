@@ -16,7 +16,7 @@ export default function FavoriteVideogames({isLoadingVideogame, setIsLoadingVide
   }
 
   useEffect(()=>{
-    if(favorites.result?.length){
+    if(favorites.result){
       setIsLoadingVideogame(false)
     }
   }, [favorites])
@@ -33,21 +33,23 @@ export default function FavoriteVideogames({isLoadingVideogame, setIsLoadingVide
           <div className='w-full pt-40'>
             <Spinner/>
           </div>
-        ):(
-          favorites.result?.length > 0? favorites.result.map((vid, ind)=>{
+        ):<></>}
+
+        {!isLoadingVideogame && favorites.result?.length > 0? (favorites.result.map((vid, ind)=>{
             return <CardVideogamesFavorite
               key={ind}
               idUser={userLogin.id}
               props={vid}
               favorites={favorites}
             />
-          }):(
-              <div className='w-full pt-40'>
-                <h2 className='font-primary font-semibold text-3xl'>Sin resultados</h2> 
-              </div>
-            )
-        )}
+          }
+        )): <></>}
 
+        {!isLoadingVideogame && !favorites.result?.length > 0? (
+          <div className='w-full pt-40'>
+            <h2 className='font-primary font-semibold text-3xl text-blanco'>no favorites</h2> 
+          </div>
+        ):<></>}
 
       </div>  
 

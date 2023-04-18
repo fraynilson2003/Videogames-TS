@@ -11,6 +11,8 @@ import User from '../models/User';
 import { videogamesGenderRelation } from './relations/VideogamesGenders_R';
 import UserVideogames from '../models/relations/UserVideogames';
 import { userVideogameRelation } from './relations/UserVideoGames_R';
+import { UserPurchasedVidRelation } from './relations/UserPurchasedVideogames_R';
+import UserPurchasedVideogame from '../models/relations/UserPurchasedVideogames';
 
 
 const {
@@ -35,9 +37,11 @@ User.initialize(sequelize)
 
 VideogamesGender.initialize(sequelize)
 UserVideogames.initialize(sequelize)
+UserPurchasedVideogame.initialize(sequelize)
 //Relations
 videogamesGenderRelation()
 userVideogameRelation()
+UserPurchasedVidRelation()
 
 console.log("***********************");
 console.log(sequelize.models);

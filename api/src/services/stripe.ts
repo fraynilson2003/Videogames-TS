@@ -76,6 +76,9 @@ export async function eventListenComplete(req: Request, res: Response) {
       default:
         console.log(`Evento de webhook no manejado: ${event.type}`);
     }
+    res.status(204).json({
+      message: "niceeee"
+    })
 
   } catch (error) {
     let {message}: any = error

@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import { handleHttp } from '../utils/error.handler';
 import { UserInterface, UserQuery } from '../interfaces/User';
 import { trimObject } from "../helpers/trimProperties";
+import { getAllPurchasedVid_S } from '../handlers/user';
 import {
   addFavoriteVideogame_S,
   deleteUser_S, getAllUsers_S,
@@ -125,6 +126,23 @@ export const addFavoriteVideogame = async (req: Request, res: Response) => {
     let { message }: any = error
     handleHttp(res, message)
   }
+}
+
+export const getPurchasedVideogames = async (req: Request, res: Response)=>{
+  try {
+    let userId: number = Number(req.query.userId)
+
+    let result = await getAllPurchasedVid_S(userId)
+
+    return res.status(202).json({
+      status: "sucess",
+      message: "Se agrego guardo exitosamente en comprados",
+      ...result
+    })
+  } catch (error) {
+    let { message }: any = error
+    handleHttp(res, message)
+  }  
 }
 
 export const removeFavoriteVideogame = async (req: Request, res: Response) => {

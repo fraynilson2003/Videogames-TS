@@ -9,6 +9,7 @@ router.get("/", [...V.validateFilterUsers], userController.getUsers)
 router.get("/detail/:userId", [...V.validateGetIdVideo], userController.getUserId)
 router.get("/videogames/favorites", [...V.validateGetFavoriteVideogames], userController.getAllVideoggamesFavorite)
 
+router.get("/videogames/purchased", userController.getPurchasedVideogames)
 
 
 /**Post */
