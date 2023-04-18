@@ -6,6 +6,7 @@ import CardVideogamesFavorite from './CardVideogamesFavorite'
 
 export default function FavoriteVideogames({isLoadingVideogame, setIsLoadingVideogame}) {
   let favorites = useSelector(state=>state.allFavorites)
+  let userLogin = useSelector(state=>state.userAuth0) 
 
   let totalFavorites = ""
   if(favorites?.totalCount && favorites.totalCount > 0){
@@ -36,6 +37,7 @@ export default function FavoriteVideogames({isLoadingVideogame, setIsLoadingVide
           favorites.result?.length > 0? favorites.result.map((vid, ind)=>{
             return <CardVideogamesFavorite
               key={ind}
+              idUser={userLogin.id}
               props={vid}
               favorites={favorites}
             />

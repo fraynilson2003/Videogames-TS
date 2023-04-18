@@ -5,11 +5,42 @@ import { ReactComponent  as Favorite } from "../../../../assets/favorite_FILL1_w
 import { ReactComponent  as Favorite0 } from "../../../../assets/favorite_FILL0_wght400_GRAD0_opsz40.svg"
 import { addFavoriteVideogame, deleteFavoriteVideogame, putReduxFavorite } from "../../../../redux/actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
+import { getSessionUrl } from "../../../../redux/actions/stripe";
 
-export default function CardVideogames({ props, active, favorites }) {
+export default function CardVideogames({ props, active, favorites,  idUser}) {
   let dispatch = useDispatch()
   let [favoriteBoolean, setFavoriteBoolean] = useState(active)
 
+  function abrirVentana(ruta) {
+    const width = 650;
+    const height = 650;
+    // eslint-disable-next-line no-restricted-globals
+    const left = window.screenLeft + (window.outerWidth - width) / 2;
+    // eslint-disable-next-line no-restricted-globals
+    const top = window.screenTop + (window.outerHeight - height) / 2;
+
+    // Verificar si ya hay una ventana hija abierta
+    if (!window.childWindow || window.childWindow.closed) {
+      window.childWindow = window.open(
+        ruta,
+        "_blank",
+        `width=${width},height=${height},left=${left},top=${top}`
+      );
+    } else {
+      // Si ya hay una ventana hija abierta, enfocarla y cambiar su ubicación
+      window.childWindow.focus();
+      window.childWindow.moveTo(left, top);
+    }
+  }
+
+  const createSessionStripe = ()=>{
+    getSessionUrl(idUser, props.id)
+    .then(res=>{
+      abrirVentana(res)    
+    }).catch(err=>{
+      alert(err)
+    })
+  }  
 
   const [isLoading, setIsLoading] = useState(true);
   let user = useSelector(state=>state.userAuth0)
@@ -130,7 +161,7 @@ export default function CardVideogames({ props, active, favorites }) {
               </h2>
             </div>
 
-            <div className="w-[50%] flex justify-end items-center h-[40px]">
+            <div onClick={createSessionStripe} className="w-[50%] flex justify-end items-center h-[40px]">
                 <div className="w-[70px] cursor-pointer rounded-lg py-1 brightness-75 bg-verde border-[1px] hover:brightness-100 ">
                   <h2 className="text-center text-lg font-semibold font-primary">Buy</h2>
                 </div>

@@ -3,7 +3,7 @@ import React from 'react'
 export default function LoadingCard() {
 
   return (
-    <div className="card my-2 mx-2 flex-auto w-auto h-[320px] max-h-[350px] max-w-[300px] min-w-[300px]  text-blanco bg-gris  bg-base-100 shadow-xl
+    <div className="card my-2 mx-2 flex-auto w-auto h-[320px] max-h-[350px] max-w-[300px] min-w-[300px]  text-blanco bg-gris shadow-xl
     md:my-3 md:mx-3 sm:my-2 sm:mx-2 rounded-md md:max-w-[280px] md:min-w-[280px]">
 
       <div role="status" class="max-w-sm min-h-[320px] p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700">

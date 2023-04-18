@@ -1,21 +1,49 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Router } from "react-router-dom";
 import LoadingCard from "../Hero/Videogames/ContainerVideogames/LoadingCard"; 
 import { ReactComponent  as Favorite } from "../../assets/favorite_FILL1_wght400_GRAD0_opsz40.svg"
 import { ReactComponent  as Favorite0 } from "../../assets/favorite_FILL0_wght400_GRAD0_opsz40.svg"
 import { addFavoriteVideogame, deleteFavoriteVideogame, putReduxFavorite } from "../../redux/actions/userAction";
+import { getSessionUrl } from "../../redux/actions/stripe";
 
-export default function CardVideogamesFavorite({ props, favorites }) {
+export default function CardVideogamesFavorite({ props, favorites, idUser }) {
   let dispatch = useDispatch()
   let [favoriteBoolean, setFavoriteBoolean] = useState(true)
-
-
-
 
   const [isLoading, setIsLoading] = useState(true);
   let user = useSelector(state=>state.userAuth0)
 
+  function abrirVentana(ruta) {
+    const width = 650;
+    const height = 650;
+    // eslint-disable-next-line no-restricted-globals
+    const left = window.screenLeft + (window.outerWidth - width) / 2;
+    // eslint-disable-next-line no-restricted-globals
+    const top = window.screenTop + (window.outerHeight - height) / 2;
+
+    // Verificar si ya hay una ventana hija abierta
+    if (!window.childWindow || window.childWindow.closed) {
+      window.childWindow = window.open(
+        ruta,
+        "_blank",
+        `width=${width},height=${height},left=${left},top=${top}`
+      );
+    } else {
+      // Si ya hay una ventana hija abierta, enfocarla y cambiar su ubicación
+      window.childWindow.focus();
+      window.childWindow.moveTo(left, top);
+    }
+  }
+
+  const createSessionStripe = ()=>{
+    getSessionUrl(idUser, props.id)
+    .then(res=>{
+      abrirVentana(res)    
+    }).catch(err=>{
+      alert(err)
+    })
+  }
 
   const handleImageLoad = () => {
     console.log("Entra al handle img");
@@ -72,17 +100,14 @@ export default function CardVideogamesFavorite({ props, favorites }) {
     })
   }
 
-  let classCard = `card my-2 mx-2 flex-auto w-auto min-h-[320px] max-h-[350px] max-w-[300px] min-w-[300px]  text-blanco bg-gris  bg-base-100 shadow-xl
-  md:my-3 md:mx-3 sm:my-2 sm:mx-2 rounded-md md:max-w-[280px] md:min-w-[280px]`
-
-  let classCardNonde = `hidden`
-
   return (
     <>
       {isLoading? <LoadingCard/> : <></>}
           
 
-      <div className={isLoading? classCardNonde : classCard}>
+      <div className={isLoading? `hidden` : `card my-2 mx-2 flex-auto w-auto min-h-[320px] max-h-[350px] max-w-[300px]
+          min-w-[300px]  text-blanco bg-gris shadow-xl
+          md:my-3 md:mx-3 sm:my-2 sm:mx-2 rounded-md md:max-w-[280px] md:min-w-[280px]`}>
 
         <NavLink to={`/detail/${props.id}`} className=" relative h-[180px] min-h-[150px] max-w-[300px] min-w-[300px] overflow-hidden rounded-t-md 
         md:max-w-[280px] md:min-w-[280px]">
@@ -131,10 +156,11 @@ export default function CardVideogamesFavorite({ props, favorites }) {
             </div>
 
             <div className="w-[50%] flex justify-end items-center h-[40px]">
-                <div className="w-[70px] cursor-pointer rounded-lg py-1 brightness-75 bg-verde border-[1px] hover:brightness-100 ">
+                <div onClick={createSessionStripe} className="w-[70px] cursor-pointer rounded-lg py-1 brightness-75 bg-verde border-[1px] hover:brightness-100 ">
                   <h2 className="text-center text-lg font-semibold font-primary">Buy</h2>
                 </div>
             </div>
+
           </div>
 
 

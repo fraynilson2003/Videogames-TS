@@ -8,7 +8,7 @@ import { getAllVideogames } from '../../../../redux/actions/actions'
 
 export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVideogame}) {
   let favorites = useSelector(state=>state.allFavorites)
-
+  let userLogin = useSelector(state=>state.userAuth0) 
 
   let dispatch = useDispatch()
   let videogames = useSelector(state =>state.allVideogames)
@@ -58,6 +58,7 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
 
             return <CardVideogames
               key={ind}
+              idUser={userLogin.id}
               props={vid}
               favorites={favorites}
               active={active}
