@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import MyData from './MyData'
 import FavoriteVideogames from './FavoriteVideogames'
+import PurchasedVid from './PurchasedVid'
+import { getPurchasedVideogames } from '../../redux/actions/userAction'
 
 export default function AsideUser() {
   let [isLoadingVideogame, setIsLoadingVideogame] = useState(true)
@@ -29,6 +31,8 @@ export default function AsideUser() {
   useEffect(()=>{
     setCategory(option? option : "myData")
   }, [option])
+
+
 
   return (
   <div className='container mx-auto min-h-[100vh]'>
@@ -70,6 +74,10 @@ export default function AsideUser() {
       <FavoriteVideogames
         isLoadingVideogame={isLoadingVideogame}
         setIsLoadingVideogame={setIsLoadingVideogame}/>
+      </div>
+
+      <div className={category === "purchased"? "block" : "hidden" }>
+        <PurchasedVid/>
       </div>
 
     </div>

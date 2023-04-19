@@ -4,6 +4,7 @@ import { order } from "../../constants/order"
 import { cleanVideogames, setConfigFilter } from '../../../redux/actions/filters'
 import { getAllVideogames } from '../../../redux/actions/actions'
 import { NavLink } from 'react-router-dom'
+import DataDev from './DataDev'
 
 export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
   let genders = useSelector(state => state.allGenders)
@@ -72,8 +73,10 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
   }
 
   return (
+    <div>
+
     <div className='flex flex-row mt-2 object-cover bg-fondo w-full h-[60px]  p-3  px-3 shadow-custom 
-      md:flex-col md:w-[240px] md:p-0 md:m-3 md:mr-2 md:shadow-none md:rounded-md md:mt-3 md:h-[400px]   xl:rounded xl:mx-auto'>
+      md:flex-col md:w-[240px] md:p-0 md:m-3 md:mr-2 md:shadow-none md:rounded-md md:mt-3 md:h-[300px]   xl:rounded xl:mx-auto'>
 
     <NavLink to={"/create"} className='hidden w-full mt-4 mb-4  md:block'>
       <div className='bg-verde/60 text-blanco border-2 w-[170px] py-2 px-3 mx-auto rounded-lg cursor-pointer hover:bg-verde'>
@@ -159,5 +162,13 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
       </div>
 
     </div>
+
+    <div className='w-full'>
+      <DataDev/>
+    </div>
+
+
+    </div>
+
   )
 }

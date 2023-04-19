@@ -41,7 +41,7 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
 
   const handleNameFilter = (event)=>{
     event.preventDefault()
-
+    
     let newFilter = {
       ...configFilter,
       ["name"]: inputName
@@ -54,7 +54,7 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
     setIsLoadingVideogame(true)
     let res = getAllVideogames(newFilter).then((res)=>{
       dispatch(res)
-      setIsLoadingVideogame(false )
+      setIsLoadingVideogame(false)
     }).catch(err=>{
       alert(err)
     })
@@ -161,6 +161,13 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
               <NavLink to={"/profile/favorites"}>
                 <div className="w-full cursor-pointer py-1 my-1 px-2  rounded-md hover:bg-oscuro/70 hover:text-blanco">
                   Favorites
+                </div>
+              </NavLink>
+              
+
+              <NavLink to={"/profile/purchased"}>
+                <div className="w-full cursor-pointer py-1 my-1 px-2  rounded-md hover:bg-oscuro/70 hover:text-blanco">
+                  Purchased
                 </div>
               </NavLink>
 

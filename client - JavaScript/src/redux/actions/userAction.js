@@ -59,6 +59,26 @@ export const getFavoritesVideogames = async(userId)=>{
   }
 }
 
+export const getPurchasedVideogames = async(userId)=>{
+  try {
+    let res = await axios.get("/user/videogames/purchased", {
+      params: {
+        userId: userId
+      }
+    })
+
+    return {
+      type: CONSTANTS.GET_ALL_PURCHASED,
+      payload: res.data
+    }
+  } catch (error) {
+    return {
+      type: CONSTANTS.GET_ALL_PURCHASED,
+      payload: error.response.data
+    } 
+  }
+}
+
 
 /***************  DELETE  ************* */
 export const deleteFavoriteVideogame = async(config)=>{

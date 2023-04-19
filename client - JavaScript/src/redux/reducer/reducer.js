@@ -16,6 +16,7 @@ const initialState = {
     result: []
   },
   allFavorites: {},
+  allPurchaseds: {},
 
   configFilterVideogames: {
     page: 1,
@@ -53,6 +54,14 @@ const initialState = {
           ...state,
           allFavorites: action.payload
         }
+
+      case CONSTANTS.GET_ALL_PURCHASED:
+        return {
+          ...state,
+          allPurchaseds: action.payload
+        }
+
+      //filter
 
       case CONSTANTS.FILTERS:
         return {
