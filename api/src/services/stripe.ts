@@ -74,11 +74,11 @@ export async function eventListenComplete(req: Request, res: Response) {
         // Realizamos acciones específicas para cuando se recibe un evento de pago exitoso
         break;
       case 'checkout.session.completed':
-        const completed = event.data.object;
+        let completed = event.data.object;
         console.log("************************************");
         console.log("Pago exitoso");
 
-        const {metadata}: any = completed
+        let {metadata}: any = completed
 
         let [productoId, userId] = metadata.split("/")
         console.log("productoId: "+productoId);

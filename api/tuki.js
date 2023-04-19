@@ -1,4 +1,5 @@
 let tu = "sauron/vid".split("/")
 
-console.log(tu);
-console.log("aaa");
+let [legolas, tukis] = tu
+console.log(legolas);
+console.log(tukis);
