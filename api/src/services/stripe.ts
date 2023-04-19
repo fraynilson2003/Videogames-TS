@@ -82,7 +82,7 @@ export async function eventListenComplete(req: Request, res: Response) {
         let {metadata}: any = completed 
         let data = metadata.name
 
-        let [userId, productId] = String(data).split("/")
+        let [productId, userId] = String(data).split("/")
 
         let user = await User.findByPk(Number(userId))
         let result = await user?.addPurchased(Number(productId))
