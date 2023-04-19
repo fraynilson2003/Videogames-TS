@@ -78,15 +78,10 @@ export async function eventListenComplete(req: Request, res: Response) {
         console.log("************************************");
         console.log("Pago exitoso");
 
-        let {metadata}: any = completed
+        let {metadata}: any = completed 
 
-        let data: string[] = String(metadata).split("/")
-        let productoId: string = data[0]
-        let userId: string = data[1]  
-
-        console.log(data);
-        console.log("productoId: "+productoId);
-        console.log("userId: "+userId);
+        console.log(metadata);
+   
 
         
         
