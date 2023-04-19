@@ -88,12 +88,15 @@ export async function eventListenComplete(req: Request, res: Response) {
         let result = await user?.addPurchased(Number(productId))
 
         console.log(result);
-        
+        return res.status(204).json(completed)
+
         
         break;
       // Agrega más casos según los tipos de eventos que quieras manejar
       default:
         console.log(`Evento de webhook no manejado: ${event.type}`);
+        return res.status(405)
+
     }
     return res.status(204).json({
       message: "niceeee"
