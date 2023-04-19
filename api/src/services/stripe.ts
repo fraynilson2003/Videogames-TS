@@ -81,7 +81,7 @@ export async function eventListenComplete(req: Request, res: Response) {
         let {metadata}: any = completed 
         let data = metadata.name
 
-        let [userId, productId] = data
+        let [userId, productId] = String(data).split("/")
 
         console.log("userId: "+userId);
         console.log("productId: "+productId);
