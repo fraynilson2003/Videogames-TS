@@ -11,6 +11,7 @@ const {
 import Stripe from "stripe";
 import { StripeWebhookRequest } from '../interfaces/Stripe';
 import { Request, Response } from "express"
+import User from '../models/User';
 const config: Stripe.StripeConfig = {
   apiVersion: '2022-11-15',
   typescript: true,
@@ -83,11 +84,10 @@ export async function eventListenComplete(req: Request, res: Response) {
 
         let [userId, productId] = String(data).split("/")
 
-        console.log("userId: "+userId);
-        console.log("productId: "+productId);
-        
-   
+        let user = await User.findByPk(Number(userId))
+        let result = await user?.addPurchased(Number(productId))
 
+        console.log(result);
         
         
         break;
