@@ -80,7 +80,7 @@ export async function eventListenComplete(req: Request, res: Response) {
 
         let {metadata}: any = completed
 
-        let data = String(metadata).split("/")
+        let data: string[] = String(metadata).split("/")
         let productoId: string = data[0]
         let userId: string = data[1]  
 
