@@ -84,6 +84,7 @@ export async function eventListenComplete(req: Request, res: Response) {
         let productoId: string = data[0]
         let userId: string = data[1]  
 
+        console.log(data);
         console.log("productoId: "+productoId);
         console.log("userId: "+userId);
 
@@ -94,13 +95,15 @@ export async function eventListenComplete(req: Request, res: Response) {
       default:
         console.log(`Evento de webhook no manejado: ${event.type}`);
     }
-    res.status(204).json({
+    return res.status(204).json({
       message: "niceeee"
     })
 
   } catch (error) {
     let {message}: any = error
-    throw new Error(message) ;
+    return res.status(405).json({
+      error: message
+    })
   }
 
 };
