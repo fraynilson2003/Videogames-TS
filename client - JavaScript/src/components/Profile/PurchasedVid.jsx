@@ -51,9 +51,9 @@ export default function PurchasedVid() {
 
         
         
-        {!isLoadingVideogame && !favorites.result?.length > 0? (
+        {!isLoadingVideogame && !allPurchaseds.result?.length > 0? (
           <div className='w-full pt-40'>
-            <h2 className='font-primary font-semibold text-3xl text-blanco'>no favorites</h2> 
+            <h2 className='font-primary font-semibold text-3xl text-blanco'>no purchaseds</h2> 
           </div>
         ):<></>}
       </div>
