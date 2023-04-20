@@ -105,7 +105,7 @@ export default function CardVideogamesFavorite({ props, favorites, idUser }) {
       {isLoading? <LoadingCard/> : <></>}
           
 
-      <div className={isLoading? `hidden` : `card my-2 mx-2 flex-auto w-auto min-h-[320px] max-h-[350px] max-w-[300px]
+      <div className={isLoading? `hidden` : `card my-2 mx-2 flex-auto w-auto min-h-[330px] max-h-[330px] max-w-[300px]
           min-w-[300px]  text-blanco bg-gris shadow-xl
           md:my-3 md:mx-3 sm:my-2 sm:mx-2 rounded-md md:max-w-[280px] md:min-w-[280px]`}>
 

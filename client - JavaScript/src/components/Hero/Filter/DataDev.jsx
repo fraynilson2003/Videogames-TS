@@ -12,63 +12,69 @@ import Sequelize from "../../../assets/sequelize-logo-black-and-white.png"
 
 export default function DataDev() {
   return (
+
     <div className='flex flex-col h-auto w-full'>
       <h1 className='text-xl pl-4 font-primary font-normal'>My data</h1>
-      <div className='flex flex-row w-full max-w-[220px] items-center justify-around m-4 h-16 text-[50px]'>
-         <a href="https://github.com/fraynilson2003">
+      <div className='flex flex-row mx-auto w-full md:max-w-[220px] items-center justify-center md:justify-around m-4 h-16 text-[50px]'>
+         <a className='my-3 mx-10 md:mx-2' href="https://github.com/fraynilson2003">
                 <FaGithub />
          </a>
 
-         <a href="https://www.linkedin.com/in/fray-desarrolador/">
+         <a className='my-3 mx-10 md:mx-2' href="https://www.linkedin.com/in/fray-desarrolador/">
                 <FaLinkedin />
          </a>
       </div>
 
       <h1 className='text-xl mt-4 pl-4 font-primary font-normal'>Technologies in this app</h1>
-      <div className='flex flex-row flex-wrap justify-around w-full max-w-[220px] mx-auto mt-4 '>
+      <div className='flex flex-row flex-wrap justify-center md:justify-around w-full  md:max-w-[220px] px-4 md:px-0 mx-auto mt-4 '>
 
-        <div className='flex flex-col justify-center items-center w-[80px] mx-2 my-3 '>
+        <div className='flex flex-col justify-center items-center w-[120px] md:w-[80px] md:mx-2 my-3 '>
           <img className='object-contain w-[50px] invert' src={iconReact} alt="react" />
         </div>
 
-        <div className='flex flex-col justify-center items-center  w-[80px] mx-2 my-3 '>
+        <div className='flex flex-col justify-center items-center w-[120px] md:w-[80px] md:mx-2 my-3'>
           <img className='object-contain w-[50px] invert' src={iconTS} alt="iconTS" />
         </div>
 
-        <div className='flex flex-col justify-center items-center  w-[80px] mx-2 my-3 '>
+        <div className='flex flex-col justify-center items-center w-[120px] md:w-[80px] md:mx-2 my-3'>
           <img className='object-contain w-[50px] invert' src={iconJS} alt="iconJS" />
         </div>
         
-        <div className='flex flex-col justify-center items-center  w-[80px] mx-2 my-3 '>
+        <div className='flex flex-col justify-center items-center w-[120px] md:w-[80px] md:mx-2 my-3'>
           <img className='object-contain w-[50px] brightness-0 scale-150 invert' src={Express} alt="Express" />
         </div>
 
-        <div className='flex flex-col justify-center items-center  w-[80px] mx-2 my-3 '>
+        <div className='flex flex-col justify-center items-center w-[120px] md:w-[80px] md:mx-2 my-3'>
           <img className='object-contain w-[50px] invert' src={NodeJS} alt="NodeJS" />
         </div>
         
-        <div className='flex flex-col justify-center items-center  w-[80px] mx-2 my-3 '>
+        <div className='flex flex-col justify-center items-center w-[120px] md:w-[80px] md:mx-2 my-3'>
           <img className='object-contain w-[50px] invert' src={Redux} alt="Redux" />
         </div>
 
-        <div className='flex flex-col justify-center items-center  w-[80px] mx-2 my-3 '>
+        <div className='flex flex-col justify-center items-center w-[120px] md:w-[80px] md:mx-2 my-3'>
           <img className='object-contain brightness-0 w-[50px] invert' src={PostgreSQL} alt="PostgreSQL" />
         </div>
         
-        <div className='flex flex-col justify-center items-center  w-[80px] mx-2 my-3 '>
+        <div className='flex flex-col justify-center items-center w-[120px] md:w-[80px] md:mx-2 my-3'>
           <img className='object-contain w-[50px] invert' src={Sequelize} alt="Sequelize" />
         </div>
 
       </div>
 
       <h1 className='text-xl mt-4 pl-4 font-primary font-normal'>View this project</h1>
-      <div className='flex flex-row w-full max-w-[220px] items-center justify-around m-4 h-16 text-[50px]'>
-        <a href="https://github.com/fraynilson2003">
-          <FaGithub />
-        </a>
+      <div className='flex flex-row mx-auto w-full md:max-w-[220px] items-center justify-center  md:justify-around m-4 h-16 text-[50px]'>
+          <a className='my-3 mx-10 md:mx-2' href="https://github.com/fraynilson2003/Videogames-TS">
+            <FaGithub />
+          </a>
+
+          <a className='my-3 mx-10 md:mx-2' href="https://github.com/fraynilson2003/Videogames-TS">
+            <FaGithub />
+          </a>
       </div>
 
     </div>
+
 
   )
 }

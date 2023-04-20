@@ -15,7 +15,7 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
 
   let totalVideogames = ""
   if(videogames?.TotalCount && videogames.TotalCount > 0){
-    totalVideogames = `|    ${videogames.TotalCount} resultados`
+    totalVideogames = `|    ${videogames.TotalCount} results found`
   }else{
     totalVideogames = ""
   }
@@ -40,8 +40,8 @@ export default function ContainerVideogames({isLoadingVideogame, setIsLoadingVid
     <div className='flex flex-col justify-start items-center   pb-[40px] rounded-none
     md:rounded-md md:bg-fondo'>
 
-      <p  id="ContainerVideogames" className='font-primary text-2xl pb-2 mr-2 text-start pl-6 pt-1
-      md:pt-4'>Videogoames <span className='font-semibold text-2xl '>{`${totalVideogames}`}</span> </p>
+      <p  id="ContainerVideogames" className='w-full justify-center md:justify-start font-primary text-2xl pb-2 mr-2 text-start pl-6 pt-1
+      md:pt-4'>Videogames <span className='font-semibold text-2xl '>{`${totalVideogames}`}</span> </p>
 
       <Paginado
       isLoadingVideogame={isLoadingVideogame}

@@ -163,10 +163,9 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
 
     </div>
 
-    <div className='w-full'>
+    <div className='w-full hidden md:block'>
       <DataDev/>
     </div>
-
 
     </div>
 

@@ -29,7 +29,7 @@ export default function PurchasedVid() {
       <p  id="ContainerVideogames" className='font-primary w-full text-blanco text-2xl pb-2 mr-2 text-start pl-6 pt-1
       md:pt-4 md:text-left md:px-10'>Videogame {allPurchaseds.totalCount} </p>
 
-       <div className='flex flex-row flex-wrap justify-around min-h-[600px] box-border h-auto w-auto'>
+       <div className='flex flex-row w-full flex-wrap justify-around min-h-[600px] box-border h-auto'>
        {isLoadingVideogame? (
           <div className='w-full pt-40'>
             <Spinner/>

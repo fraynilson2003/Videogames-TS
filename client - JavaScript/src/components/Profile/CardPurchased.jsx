@@ -77,7 +77,7 @@ export default function CardPurchased({ props, favorites, active }) {
       {isLoading? <LoadingCard/> : <></>}
           
 
-      <div className={isLoading? `hidden` : `card my-2 mx-2 flex-auto w-auto min-h-[320px] max-h-[350px] max-w-[300px]
+      <div className={isLoading? `hidden` : `card my-2 mx-2 flex-auto w-auto min-h-[330px] max-h-[330px] max-w-[300px]
           min-w-[300px]  text-blanco bg-gris shadow-xl
           md:my-3 md:mx-3 sm:my-2 sm:mx-2 rounded-md md:max-w-[280px] md:min-w-[280px]`}>
 
@@ -119,23 +119,24 @@ export default function CardPurchased({ props, favorites, active }) {
             </div>
           </div>
 
-          {/* Price */}
-          <div className="flex flex-row items-end flex-1 relative w-full justify-end ">
-            <div className="flex items-center w-full  h-[40px]">
-              <h2 className="text-2xl w-[80px] font-bold font-primary rounded-xl  text-blanco px-[7px] py-[2px] border-blanco border-[1px]">
-                {`$ ${props.price}`}
-              </h2>
+
+          <div className="flex flex-row ">
+            {/* Price */}
+            <div className="flex items-center w-[40%]  h-[40px]">
+                <h2 className="text-2xl w-[80px] font-bold font-primary rounded-xl text-blanco px-[7px] py-[2px] border-blanco border-[1px]">
+                  {`$ ${props.price}`}
+                </h2>
+            </div>
+
+
+            {/* Generos */}
+            <div className="card-actions items-end  flex-1 justify-end   ">
+              {Genders.length? (Genders.map((g)=>
+                <div className="badge badge-outline text-sm px-2">{g.name}</div>
+              )):<></>}
             </div>
           </div>
 
-
-          {/* Generos */}
-
-          <div className="card-actions justify-end pb-2">
-            {Genders.length? (Genders.map((g)=>
-              <div className="badge badge-outline select-none text-sm px-2">{g.name}</div>
-            )):<></>}
-          </div>
         </div>
       </div>
       
