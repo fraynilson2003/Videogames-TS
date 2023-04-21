@@ -12,8 +12,9 @@ import { NavLink } from "react-router-dom";
 
 export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoadingImg}) {
   const [isHovered, setIsHovered] = useState(false);
-  const [countFav, setCountFav] = useState(7)
+  let countNotify = useSelector(state=>state.countNotify)
   const [loadingImg, setLoadingImg] = useState(true)
+
 
   //loading img
   useEffect(()=>{
@@ -111,7 +112,7 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator ml-[2px] ">
                 <img src={favoritos}/>
-                {countFav && favoriteNum(countFav)}
+                {countNotify? favoriteNum(countNotify):null}
               </div>
             </label>
           </div>

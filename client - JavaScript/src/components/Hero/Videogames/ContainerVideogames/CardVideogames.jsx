@@ -6,10 +6,14 @@ import { ReactComponent  as Favorite0 } from "../../../../assets/favorite_FILL0_
 import { addFavoriteVideogame, deleteFavoriteVideogame, putReduxFavorite } from "../../../../redux/actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { getSessionUrl } from "../../../../redux/actions/stripe";
+import { Link } from "react-scroll"
+import { putReduxNotify } from "../../../../redux/actions/actionState";
+
 
 export default function CardVideogames({ props, active, favorites,  idUser}) {
   let dispatch = useDispatch()
   let [favoriteBoolean, setFavoriteBoolean] = useState(active)
+  let countNotify = useSelector(state=>state.countNotify)
 
   function abrirVentana(ruta) {
     const width = 650;
@@ -33,14 +37,15 @@ export default function CardVideogames({ props, active, favorites,  idUser}) {
     }
   }
 
-  const createSessionStripe = ()=>{
-    getSessionUrl(idUser, props.id)
-    .then(res=>{
-      abrirVentana(res)    
-    }).catch(err=>{
-      alert(err)
-    })
-  }  
+  let addNotify = ()=>{
+    dispatch(putReduxNotify(countNotify + 1))
+  }
+  let deleteNotify = ()=>{
+    if(countNotify > 0){
+      dispatch(putReduxNotify(countNotify - 1))
+    }
+  }
+
 
   const [isLoading, setIsLoading] = useState(true);
   let user = useSelector(state=>state.userAuth0)
@@ -76,6 +81,7 @@ export default function CardVideogames({ props, active, favorites,  idUser}) {
       videogameId: props.id
     }
     setFavoriteBoolean(true)
+    addNotify()
     addFavoriteVideogame(config)
     .then(res=>{
       console.log("agregado correctamente");
@@ -83,10 +89,11 @@ export default function CardVideogames({ props, active, favorites,  idUser}) {
 
     }).catch(err=>{
       setFavoriteBoolean(false)
+      deleteNotify()
       alert(err)
     })
   }
-
+  
   
   let handleDeleteFavorite = ()=>{
     let config = {
@@ -94,12 +101,14 @@ export default function CardVideogames({ props, active, favorites,  idUser}) {
       videogameId: props.id
     }
     setFavoriteBoolean(false)
+    deleteNotify()
     deleteFavoriteVideogame(config)
     .then(res=>{
       console.log("elimiando correctamente");
       deleteRedux()
     }).catch(err=>{
       setFavoriteBoolean(true)
+      addNotify()
       alert(err)
     })
   }
@@ -118,10 +127,14 @@ export default function CardVideogames({ props, active, favorites,  idUser}) {
 
         <NavLink to={`detail/${props.id}`} className=" relative h-[180px] min-h-[150px] max-w-[300px] min-w-[300px] overflow-hidden rounded-t-md 
         md:max-w-[280px] md:min-w-[280px]">
+
+
           <img 
           className="object-cover h-full w-full"  
           src={props.background_image}
           onLoad={handleImageLoad}/>
+
+
 
 
         </NavLink>
