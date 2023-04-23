@@ -86,6 +86,7 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
         
      
       <div className="flex flex-row p-0 m-0 ">
+        <NavLink to={"/"}>
         <Logo           
           onMouseEnter={handleHover}
           onMouseLeave={() => setIsHovered(false)}
@@ -93,6 +94,7 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
           height={50}
           fill={isHovered ? "rgb(211, 191, 13)" : "#ffffff" }
           style={{cursor: 'pointer', scale: 1.2}}/>
+        </NavLink>
       </div>
 
       <div className="flex flex-row items-center flex-1 w-auto justify-end pr-2">
@@ -147,7 +149,7 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
           <div className={menu? "absolute  top-14 right-0 w-[200px] px-2 py-1 bg-blanco text-oscuro rounded-lg"  : "hidden"}>
             {userAuth0?.imagePerfil? (
               <div className="font-semibold">
-              <NavLink className="w-full" to={"/"}>
+              <NavLink className="w-full" to={"/home"}>
                 <div className="w-full cursor-pointer py-1 my-1 px-2 tracking-1.5 rounded-md hover:bg-oscuro/70 hover:text-blanco">
                   Home
                 </div>

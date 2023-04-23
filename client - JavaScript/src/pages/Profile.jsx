@@ -7,6 +7,8 @@ export default function Profile() {
 
   return (
     <>
+    <div className='bg-oscuro pb-4 '>
+
         <NavBar       
           isLoadingVideogame={isLoadingVideogame}
           setIsLoadingVideogame={setIsLoadingVideogame}
@@ -14,6 +16,7 @@ export default function Profile() {
 
         <AsideUser/>
 
+    </div>
  
     </>
   

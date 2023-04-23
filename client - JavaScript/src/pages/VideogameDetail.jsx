@@ -44,7 +44,7 @@ export default function VideogameDetail() {
     </div>
     <div  className='flex flex-col flex-wrap container min-h-[100vh] mx-auto  bg-oscuro md:mx-auto'>
       <div className='flex  justify-start w-full  mt-2 px-5' >
-        <NavLink to={`/`} className='mt-4 w-[65px] text-center px-2 py-1 bg-amarillo/90 text-oscuro font-bold text-base font-primary rounded-sm cursor-pointer
+        <NavLink to={`/home`} className='mt-4 w-[65px] text-center px-2 py-1 bg-amarillo/90 text-oscuro font-bold text-base font-primary rounded-sm cursor-pointer
         hover:bg-amarillo '>
           Home
         </NavLink>

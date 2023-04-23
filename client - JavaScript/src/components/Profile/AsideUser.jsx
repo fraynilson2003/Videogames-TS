@@ -35,7 +35,7 @@ export default function AsideUser() {
 
 
   return (
-  <div className='container mx-auto min-h-[100vh]'>
+  <div className='container mx-auto h-auto min-h-[100vh]'>
     <div className='w-full h-12  py-0 px-4 bg-oscuro'>
       <div className='relative h-full flex flex-row items-center justify-center md:justify-start  text-blanco overflow-hidden'>
 

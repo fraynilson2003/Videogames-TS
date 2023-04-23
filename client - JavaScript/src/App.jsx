@@ -10,6 +10,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { getFavoritesVideogames, loginAuth0, putUserAuth0 } from './redux/actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import Profile from './pages/Profile';
+import LandingPage from './pages/LandingPage';
 
 
 axios.defaults.baseURL = "https://videogames-ts-production.up.railway.app/"
@@ -91,10 +92,11 @@ function App() {
     }
   }, [isAuthenticated])
   return (
-    <div className='App w-full min-w-full md:h-[2000px] '>
+    <div className='App w-full min-w-full md:h-[100vh] '>
       <Routes>
         
-        <Route exact path="/" element={<Home/>}/>
+        <Route exact path="/" element={<LandingPage/>}/>
+        <Route exact path="/home" element={<Home/>}/>
 
 
         <Route exact path="/detail/:idVideogame" element={<VideogameDetail/>}/>
