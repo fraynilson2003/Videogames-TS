@@ -1,21 +1,16 @@
 import React from 'react'
-import video from "../../video/5222gaming world Youtube channel - Made with PosterMyWall.mp4"
 import { NavLink } from 'react-router-dom'
+import fondoIMG from "../../assets/fondo.jpg"
 
 export default function Banner() {
   return (
-    <div className='flex flex-col min-h-screen max-w-[1920px] max-h-[1200px]'>
-      <div className="absolute inset-0 backdrop-blur-[1px]">
+    <div className='relative flex flex-col overflow-hidden min-h-screen max-w-[1920px] max-h-[1200px]'>
 
-        <video
-          className="w-full h-full object-cover backdrop-blur-[1px] brightness-50 select-none z-10"
-          autoPlay
-          loop
-          muted
-        >
-          <source src={video} type="video/mp4" />
-          {/* Agrega más elementos source si tu video tiene diferentes formatos */}
-        </video>
+        <div className='w-full h-screen max-h-screen object-cover'>
+          <img
+            className="w-full h-full object-cover backdrop-blur-[1px] brightness-50 select-none z-10"
+            src={fondoIMG}/>
+        </div>
 
         <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
           <div className='max-w-[600px] '>
@@ -36,7 +31,6 @@ export default function Banner() {
           </div>
         </div>
 
-      </div>
     </div>
   )
 }
