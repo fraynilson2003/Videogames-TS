@@ -13,7 +13,7 @@ export default function CreateVideogame() {
     dispatch(getAllGenders())
   },[])
   return (
-    <>
+    <div className='bg-oscuro'>
     <div className="hidden">
       <Home/>
     </div>
@@ -32,7 +32,7 @@ export default function CreateVideogame() {
       </div>
 
     </div>
-    </>
+    </div>
 
   )
 }
