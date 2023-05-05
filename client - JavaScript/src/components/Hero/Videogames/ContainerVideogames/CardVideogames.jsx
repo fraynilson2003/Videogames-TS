@@ -151,11 +151,14 @@ export default function CardVideogames({ props, active, favorites,  idUser}) {
             <div  className="w-[20%] ml-[5%]">
 
               {!userAuth0?.imagePerfil? (
-                <Favorite 
-                onClick={()=>loginWithRedirect()}          
-                width={30}
-                height={30}
-                fill="rgb(230,230,230)"/>
+                <div className="flex justify-center items-center absolute top-2 right-4 w-[40px] h-[40px] bg-blanco/20 border filter blur-[4] cursor-pointer rounded-full" >
+                  <Favorite0 
+                  onClick={()=>loginWithRedirect()}          
+                  width={30}
+                  height={30}
+                  fill="rgb(4, 4, 4, 0.8)"/>
+                </div>
+
               ):(
                 <div className="flex justify-center items-center absolute top-2 right-4 w-[40px] h-[40px] bg-blanco/20 border filter blur-[4] cursor-pointer rounded-full" >
                 {favoriteBoolean?(
