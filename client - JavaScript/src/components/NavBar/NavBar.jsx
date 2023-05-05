@@ -189,17 +189,28 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
                 </div>
               </NavLink>
 
+              <NavLink to={"/create"}>
+                <div className="w-full cursor-pointer py-1 my-1 px-2  rounded-md hover:bg-oscuro/70 hover:text-blanco">
+                  New Videogame
+                </div>
+              </NavLink>
+
               <Logout classN="w-full cursor-pointer py-1 my-1 px-2  rounded-md hover:bg-oscuro/70 hover:text-blanco"/>
 
               </div>
             ):(
               <>
+                <Login classN="w-full cursor-pointer py-1 my-1 px-2  rounded-md hover:bg-oscuro/70 hover:textbl hover:text-blanco"/>
                 <NavLink className="w-full" to={"/home"}>
                   <div className="w-full cursor-pointer py-1 my-1 px-2 tracking-1.5 rounded-md hover:bg-oscuro/70 hover:text-blanco">
                     Home
                   </div>
                 </NavLink>
-                <Login classN="w-full cursor-pointer py-1 my-1 px-2  rounded-md hover:bg-oscuro/70 hover:textbl hover:text-blanco"/>
+                <NavLink to={"/create"}>
+                <div className="w-full cursor-pointer py-1 my-1 px-2  rounded-md hover:bg-oscuro/70 hover:text-blanco">
+                  New Videogame
+                </div>
+              </NavLink>
               </>
             )}
 
