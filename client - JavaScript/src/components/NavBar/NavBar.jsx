@@ -15,6 +15,10 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
   let countNotify = useSelector(state=>state.countNotify)
   const [loadingImg, setLoadingImg] = useState(true)
 
+  //login?
+  let userAuth0 = useSelector((state)=>state.userAuth0)  
+  const { loginWithRedirect } = useAuth0()
+
 
   //loading img
   useEffect(()=>{
@@ -27,9 +31,7 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
   //option true
   let [menu, setMenu] = useState(false)
 
-  //login?
-  let userAuth0 = useSelector((state)=>state.userAuth0)
-  const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0()
+
 
 
   //estado para input name
@@ -109,8 +111,19 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
         </form>
 
         {/*Carrito*/}
-        <NavLink to={"/profile/favorites"}>
-          <div className="">
+        {userAuth0?.imagePerfil? (
+          <NavLink to={"/profile/favorites"}>
+            <div className="">
+              <label tabIndex={0} className="btn btn-ghost btn-circle">
+                <div className="indicator ml-[2px] ">
+                  <img src={favoritos}/>
+                  {countNotify? favoriteNum(countNotify):null}
+                </div>
+              </label>
+            </div>
+          </NavLink>
+        ):(
+          <div onClick={()=>loginWithRedirect()} className="cursor-pointer">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator ml-[2px] ">
                 <img src={favoritos}/>
@@ -118,7 +131,9 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
               </div>
             </label>
           </div>
-        </NavLink>
+        )}
+       
+
 
 
         {/* Perfil */}
@@ -178,7 +193,14 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
 
               </div>
             ):(
-              <Login classN="w-full cursor-pointer py-1 my-1 px-2  rounded-md hover:bg-oscuro/70 hover:textbl hover:text-blanco"/>
+              <>
+                <NavLink className="w-full" to={"/home"}>
+                  <div className="w-full cursor-pointer py-1 my-1 px-2 tracking-1.5 rounded-md hover:bg-oscuro/70 hover:text-blanco">
+                    Home
+                  </div>
+                </NavLink>
+                <Login classN="w-full cursor-pointer py-1 my-1 px-2  rounded-md hover:bg-oscuro/70 hover:textbl hover:text-blanco"/>
+              </>
             )}
 
 

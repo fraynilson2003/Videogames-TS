@@ -66,8 +66,7 @@ export const BarraEleccion = ({values, setValues, errors, touched}) => {
           Select genders
         </div>
 
-
-
+        
 
           <div className={stateDespliegue? `flex flex-col items-center py-2   min-h-[200px] h-auto w-full rounded-lg bg-oscuro/70 mt-2 text-blanco transition-all duration-100  
           max-h-[300px] scroll-my-0 overflow-hidden ` : `max-h-[0px] transition-all duration-100`}>
