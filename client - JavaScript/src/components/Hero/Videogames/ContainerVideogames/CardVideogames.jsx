@@ -6,12 +6,17 @@ import { ReactComponent  as Favorite0 } from "../../../../assets/favorite_FILL0_
 import { addFavoriteVideogame, deleteFavoriteVideogame, putReduxFavorite } from "../../../../redux/actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { putReduxNotify } from "../../../../redux/actions/actionState";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 export default function CardVideogames({ props, active, favorites,  idUser}) {
   let dispatch = useDispatch()
   let [favoriteBoolean, setFavoriteBoolean] = useState(active)
   let countNotify = useSelector(state=>state.countNotify)
+
+  //login?
+  let userAuth0 = useSelector((state)=>state.userAuth0)  
+  const { loginWithRedirect } = useAuth0()
 
   function abrirVentana(ruta) {
     const width = 650;
@@ -144,7 +149,15 @@ export default function CardVideogames({ props, active, favorites,  idUser}) {
               {props.name}
             </h2>
             <div  className="w-[20%] ml-[5%]">
-              <div className="flex justify-center items-center absolute top-2 right-4 w-[40px] h-[40px] bg-blanco/20 border filter blur-[4] cursor-pointer rounded-full" >
+
+              {!userAuth0?.imagePerfil? (
+                <Favorite 
+                onClick={()=>loginWithRedirect()}          
+                width={30}
+                height={30}
+                fill="rgb(230,230,230)"/>
+              ):(
+                <div className="flex justify-center items-center absolute top-2 right-4 w-[40px] h-[40px] bg-blanco/20 border filter blur-[4] cursor-pointer rounded-full" >
                 {favoriteBoolean?(
                   <Favorite 
                   onClick={handleDeleteFavorite}          
@@ -158,9 +171,10 @@ export default function CardVideogames({ props, active, favorites,  idUser}) {
                   height={30}
                   fill="rgb(4, 4, 4, 0.8)"/>
                 )}
-        
-
               </div>
+              )}
+
+
             </div>
           </div>
 
