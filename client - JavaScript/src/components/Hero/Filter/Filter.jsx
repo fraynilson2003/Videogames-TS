@@ -78,7 +78,7 @@ export default function Filter({isLoadingVideogame, setIsLoadingVideogame}) {
     <div className='flex flex-row mt-2 object-cover bg-fondo w-full h-[60px]  p-3  px-3 shadow-custom 
       md:flex-col md:w-[240px] md:p-0 md:m-3 md:mr-2 md:shadow-none md:rounded-md md:mt-3 md:h-[300px]   xl:rounded xl:mx-auto'>
 
-    <NavLink to={"/create"} className='hidden md:w-full md:mt-4 md:mb-4'>
+    <NavLink to={"/create"} className='hidden md:w-full md:mt-4 md:mb-4 md:block'>
       <div className='bg-verde/60 text-blanco border-2 w-[170px] py-2 px-3 mx-auto rounded-lg cursor-pointer hover:bg-verde'>
         <p className=' text-center text-lg font-bold'>New videogame</p>
       </div>
