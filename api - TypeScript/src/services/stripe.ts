@@ -41,8 +41,8 @@ export async function createSession(priceId: string, idProductDB: string, userId
 
       mode: "payment", // tipo de pago, como no es recurrente es payment
 
-      success_url: `${FRONT_BASE_URL}/profile/purchased`, // si el pago es exitoso se redirige aqui
-      cancel_url: `${FRONT_BASE_URL}/stripe/fail`, // si el pago es cancelado o fallo redirige aqui
+      success_url: `${FRONT_BASE_URL}/profile/purchased?sucess=true`, // si el pago es exitoso se redirige aqui
+      cancel_url: `${FRONT_BASE_URL}/profile/purchased?sucess=false`, // si el pago es cancelado o fallo redirige aqui
     })
 
     return session; // en sesion viene la url que da stripe para el formulario y se pueda realizar el pago
