@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import favoritos from "../../assets/favoritos.svg"
 import { ReactComponent  as Logo } from "../../assets/TS.svg"
 import { cleanVideogames, setConfigFilter } from "../../redux/actions/filters";
@@ -11,6 +11,8 @@ import Login from "../Login/Login";
 import { NavLink } from "react-router-dom";
 
 export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoadingImg}) {
+
+
   const [isHovered, setIsHovered] = useState(false);
   let countNotify = useSelector(state=>state.countNotify)
   const [loadingImg, setLoadingImg] = useState(true)
@@ -29,8 +31,27 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
   let dispatch = useDispatch()
 
   //option true
+  const refAvatar = useRef(null);
+  const refOption = useRef(null);
+
   let [menu, setMenu] = useState(false)
 
+  const handleClickOutside = (event) => {
+    // Comprueba si el clic se realizó dentro o fuera del componente
+    if (refAvatar.current && !refAvatar.current.contains(event.target) && refOption.current && !refOption.current.contains(event.target)) {
+      setMenu(false)
+    }
+  };
+
+  useEffect(() => {
+    // Agrega un manejador de eventos en la carga de la página
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Limpia el manejador de eventos cuando el componente se desmonta
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
 
 
 
@@ -139,7 +160,7 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
         {/* Perfil */}
         <div className="relative w-150px max-h-full right-0 z-[110]">
           <div>
-            <div onClick={()=>setMenu(!menu)} className="max-h-full w-12 rounded-full overflow-hidden cursor-pointer">
+            <div onClick={()=>setMenu(!menu)} ref={refAvatar} className="max-h-full w-12 rounded-full overflow-hidden cursor-pointer">
 
               {loadingImg?(
                  <img src={missingAvatar} alt="no register" />
@@ -161,7 +182,7 @@ export default function NavBar({isLoadingVideogame, setIsLoadingVideogame, isLoa
             </div>
           </div>
 
-          <div className={menu? "absolute  top-14 right-0 w-[200px] px-2 py-1 bg-blanco text-oscuro rounded-lg"  : "hidden"}>
+          <div ref={refOption} className={menu? "absolute  top-14 right-0 w-[200px] px-2 py-1 bg-blanco text-oscuro rounded-lg"  : "hidden"}>
             {userAuth0?.imagePerfil? (
               <div className="font-semibold">
               <NavLink className="w-full" to={"/home"}>
