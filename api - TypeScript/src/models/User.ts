@@ -15,9 +15,9 @@ import {
   BelongsToManySetAssociationsMixin
 } from 'sequelize'
 import Videogame from './Videogames';
-  
 
-class User extends Model  {
+
+class User extends Model {
 
   public id!: number
   public active!: boolean
@@ -99,8 +99,8 @@ class User extends Model  {
       sexo: {
         type: DataTypes.STRING(1),
         validate: {
-            isIn: [["M", "F"]]
-          }
+          isIn: [["M", "F"]]
+        }
       },
       edad: {
         type: DataTypes.INTEGER,
@@ -108,7 +108,7 @@ class User extends Model  {
       created_at: {
         type: DataTypes.DATE,
         defaultValue: Date.now(),
-        allowNull: false, 
+        allowNull: false,
       }
     }, {
       sequelize: sequelize,
@@ -120,6 +120,5 @@ class User extends Model  {
 
 }
 
-let nani: User = new User()
 
 export default User

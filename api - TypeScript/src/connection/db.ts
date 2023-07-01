@@ -52,6 +52,6 @@ console.log(sequelize.models);
 
 
 
-export { 
-    sequelize as conn
+export {
+  sequelize as conn
 };

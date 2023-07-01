@@ -1,8 +1,6 @@
 import "dotenv/config"
-import { urlencoded } from "body-parser";
 import express from "express"
 import cors, { CorsOptions } from "cors"
-import pinoHttp from 'pino-http';
 import fileupload from "express-fileupload"
 import { router } from "./routes/index"
 import morgan from "morgan";
