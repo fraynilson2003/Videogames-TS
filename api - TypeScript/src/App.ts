@@ -16,10 +16,21 @@ let router2 = express.Router()
 router2.post("/stripe/webhook", express.raw({ type: 'application/json' }), eventListenComplete)
 app.use('/', router2);
 
+// const corsOptions: CorsOptions = {
+//   origin: [
+//     'https://videogames-portafolio.vercel.app',
+//   ]
+// };
+const whitelist = ["https://videogames-portafolio.vercel.app"];
+
 const corsOptions: CorsOptions = {
-  origin: [
-    'https://videogames-portafolio.vercel.app',
-  ]
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin!) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("No permitido por CORS"));
+    }
+  },
 };
 
 app.use(cors(corsOptions));
