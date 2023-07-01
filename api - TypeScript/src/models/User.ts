@@ -120,4 +120,6 @@ class User extends Model  {
 
 }
 
+let nani: User = new User()
+
 export default User

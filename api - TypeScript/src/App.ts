@@ -1,7 +1,7 @@
 import "dotenv/config"
 import { urlencoded } from "body-parser";
 import express from "express"
-import cors from "cors"
+import cors, { CorsOptions } from "cors"
 import pinoHttp from 'pino-http';
 import fileupload from "express-fileupload"
 import { router } from "./routes/index"
@@ -15,11 +15,17 @@ const app = express()
 
 //webhook
 let router2 = express.Router()
-router2.post("/stripe/webhook", express.raw({type: 'application/json'}), eventListenComplete)
+router2.post("/stripe/webhook", express.raw({ type: 'application/json' }), eventListenComplete)
 app.use('/', router2);
 
-app.use(cors())
-app.use(express.urlencoded({extended: true}))
+const corsOptions: CorsOptions = {
+  origin: [
+    'https://videogames-portafolio.vercel.app',
+  ]
+};
+
+app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(morgan("dev"))
 app.use(fileupload({
